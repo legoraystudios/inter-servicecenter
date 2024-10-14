@@ -28,15 +28,22 @@ const Footer = () => {
                 </Col>
                 <Col sm={3}>
                     <Container className="my-5 justify-content-center">
-                        <h5>ENLACES DE INTERÉS</h5>
+                        <h5>Enlaces de Interés</h5>
                         <div className='border-bottom mb-5 border-secondary'></div>
-                        <Button href="https://www.inter.edu/professional-licensure-notifications/" target="_blank">Professional Licensure Notification</Button>
+                        <ul className="list-unstyled">
+                          <li className="nav-item"><a className="text-white text-decoration-none" href="#">Instrucciones Red Wireless</a></li>
+                          <li className="nav-item"><a className="text-white text-decoration-none" href="#">Student Achievement</a></li>
+                          <li className="nav-item"><a className="text-white text-decoration-none" href="#">Acreditaciones</a></li>
+                          <li className="nav-item"><a className="text-white text-decoration-none" href="#">Banner 9 Prod</a></li>
+                          <li className="nav-item"><a className="text-white text-decoration-none" href="#">Kronos</a></li>
+                        </ul>
                     </Container>
                 </Col>
                 <Col sm={3}>
                     <Container className="my-5 justify-content-center">
-                        <h5>ENLACES DE INTERÉS</h5>
+                        <h5>Servicios</h5>
                         <div className='border-bottom mb-5 border-secondary'></div>
+                        <Button href="https://www.inter.edu/professional-licensure-notifications/" target="_blank">Professional Licensure Notification</Button>
                     </Container>
                 </Col>
               </Row>
