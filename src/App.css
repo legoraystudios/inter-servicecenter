@@ -1,12 +1,15 @@
 :root {
   --background-color-primary: #005C2F;
+  --background-color-danger: #bb2d3b;
+  --background-color-warning: #ffca2c;
+  --background-color-dark-grey: #212121;
 }
 
 .nav-link {
   color: var(--background-color-primary);
 }
 
-a {
+.green-link {
   color: var(--background-color-primary);
   text-decoration: none;
 }
@@ -14,6 +17,21 @@ a {
 .green-navbar {
   background-color: var(--background-color-primary) !important;
   height: 2px;
+}
+
+.component-green-bar {
+  background-color: var(--background-color-primary) !important;
+  margin-bottom: -15px;
+}
+
+.component-warning-bar {
+  background-color: var(--background-color-warning) !important;
+  margin-bottom: -15px;
+}
+
+.component-danger-bar {
+  background-color: var(--background-color-danger) !important;
+  margin-bottom: -15px;
 }
 
 .bg-primary {
@@ -26,4 +44,24 @@ a {
 
 .nav-dropdown-item {
   margin-top: -5px;
+}
+
+.footer-disclaimer {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.developer-footer-bar {
+  background-color: black;
+  text-align: center;
+  padding: 10px 0px 1px 0px;
+}
+
+.calendar-active-color {
+  background-color: var(--background-color-primary);
+  border-color: var(--background-color-primary);
+}
+
+footer {
+  background-color: var(--background-color-dark-grey);
 }

@@ -7,6 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import NavLogo from "../images/Inter-Fajardo-Logo.png";
+import ComponentBar from "./ComponentBar";
 
 const MainNavbar = () => {
 
@@ -28,7 +29,6 @@ const MainNavbar = () => {
                     style={{ maxHeight: '100px' }}
                     navbarScroll
                   >
-                    <Nav.Link className="nav-link" href="#">Home</Nav.Link>
                     <NavDropdown className="nav-link" title="Herramientas de Estudio" id="navbarScrollingDropdown">
                         <Container className="nav-dropdown-menu">
                             <h5>Blackboard Learn</h5>
@@ -86,25 +86,34 @@ const MainNavbar = () => {
                               </Col>
                               <Col>
                                 <a className="nav-link nav-dropdown-item" href="#">
-                                  <i className="bi bi-journal-text"></i>
+                                  <i className="bi bi-journal-text me-1"></i>
                                   Directorio Telefónico
                                 </a>
                               </Col>
                               <Col>
                                 <a className="nav-link nav-dropdown-item" href="mailto:admisiones@fajardo.inter.edu">
-                                  <i className="bi bi-envelope-fill"></i>
+                                  <i className="bi bi-envelope-fill me-1"></i>
                                   admisiones@fajardo.inter.edu
+                                </a>
+                              </Col>
+                            </Row>
+                            <Row>
+                              <Col>
+                                <a className="nav-link nav-dropdown-item" href="https://help.inter.edu/" target="_blank">
+                                  <i className="bi bi-question-circle-fill me-1"></i>
+                                  Centro de Ayuda
                                 </a>
                               </Col>
                             </Row>
                         </Container>
                     </NavDropdown>
                   </Nav>
-                  <Nav.Item className="nav-link me-2">{fullDate}</Nav.Item>
-                  {/*<Nav.Link className='d-flex' href="#">
+                  {/*<i className="bi bi-calendar-check-fill nav-link"></i>
+                  <Nav.Item className="nav-link mx-2">{fullDate}</Nav.Item>*/}
+                  <Nav.Link className='d-flex' href="https://fajardo.inter.edu" target="_blank">
                     <i className="bi bi-box-arrow-up-right me-1"></i>
-                        fajardo.inter.edu
-                  </Nav.Link>*/}
+                        Ir a fajardo.inter.edu
+                  </Nav.Link>
                 </Navbar.Collapse>
               </Container>
             </Navbar>
