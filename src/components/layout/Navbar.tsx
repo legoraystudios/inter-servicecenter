@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import NavLogo from "../images/Inter-Fajardo-Logo.png";
+import NavLogo from "../images/Service-Center-Logo.png";
 import ComponentBar from "./ComponentBar";
 
 const MainNavbar = () => {
@@ -21,7 +21,7 @@ const MainNavbar = () => {
         <div>
             <Navbar expand="lg" className="bg-body-tertiary">
               <Container fluid>
-                <Navbar.Brand href="https://fajardo.inter.edu" target="_blank"><img src={NavLogo} height={30} /></Navbar.Brand>
+                <Navbar.Brand href="https://fajardo.inter.edu" target="_blank"><img src={NavLogo} height={70} /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                   <Nav
