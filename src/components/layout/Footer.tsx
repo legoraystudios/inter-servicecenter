@@ -18,11 +18,11 @@ const Footer = () => {
                     </Container>
                     <Container>
                         <ul className="nav justify-content-center pb-3 mb-3">
-                          <li className="nav-item"><a href="#" className="nav-link px-2 text-white"><i className="bi bi-facebook me-1 fs-4"></i></a></li>
-                          <li className="nav-item"><a href="#" className="nav-link px-2 text-white"><i className="bi bi-twitter-x me-1 fs-4"></i></a></li>
-                          <li className="nav-item"><a href="#" className="nav-link px-2 text-white"><i className="bi bi-linkedin me-1 fs-4"></i></a></li>
-                          <li className="nav-item"><a href="#" className="nav-link px-2 text-white"><i className="bi bi-instagram me-1 fs-4"></i></a></li>
-                          <li className="nav-item"><a href="#" className="nav-link px-2 text-white"><i className="bi bi-tiktok me-1 fs-4"></i></a></li>
+                          <li className="nav-item"><a href="https://www.facebook.com/inter.fajardo.edu/" target="_blank" className="nav-link px-2 text-white"><i className="bi bi-facebook me-1 fs-4"></i></a></li>
+                          <li className="nav-item"><a href="https://x.com/inter_fajardo" target="_blank" className="nav-link px-2 text-white"><i className="bi bi-twitter-x me-1 fs-4"></i></a></li>
+                          <li className="nav-item"><a href="https://www.linkedin.com/in/interfajardo/" target="_blank" className="nav-link px-2 text-white"><i className="bi bi-linkedin me-1 fs-4"></i></a></li>
+                          <li className="nav-item"><a href="https://www.instagram.com/inter_fajardo" target="_blank" className="nav-link px-2 text-white"><i className="bi bi-instagram me-1 fs-4"></i></a></li>
+                          <li className="nav-item"><a href="http://www.tiktok.com/@inter.fajardo" target="_blank" className="nav-link px-2 text-white"><i className="bi bi-tiktok me-1 fs-4"></i></a></li>
                         </ul>
                     </Container>
                 </Col>
@@ -31,11 +31,11 @@ const Footer = () => {
                         <h5>Enlaces de Interés</h5>
                         <div className='border-bottom mb-5 border-secondary'></div>
                         <ul className="list-unstyled">
-                          <li className="nav-item"><a className="text-white text-decoration-none" href="#">Instrucciones Red Wireless</a></li>
-                          <li className="nav-item"><a className="text-white text-decoration-none" href="#">Student Achievement</a></li>
-                          <li className="nav-item"><a className="text-white text-decoration-none" href="#">Acreditaciones</a></li>
-                          <li className="nav-item"><a className="text-white text-decoration-none" href="#">Banner 9 Prod</a></li>
-                          <li className="nav-item"><a className="text-white text-decoration-none" href="#">Kronos</a></li>
+                          <li className="nav-item"><a className="text-white text-decoration-none" href="http://fajardo.inter.edu/directorio/instrucciones-red-wireless/" target="_blank">Instrucciones Red Wireless</a></li>
+                          <li className="nav-item"><a className="text-white text-decoration-none" href="http://fajardo.inter.edu/student-achievement/" target="_blank">Student Achievement</a></li>
+                          <li className="nav-item"><a className="text-white text-decoration-none" href="http://fajardo.inter.edu/acreditaciones/" target="_blank">Acreditaciones</a></li>
+                          <li className="nav-item"><a className="text-white text-decoration-none" href="https://uis.inter.edu/prod/" target="_blank">Banner 9 Prod</a></li>
+                          <li className="nav-item"><a className="text-white text-decoration-none" href="https://oficinas-centrales.kronos.net/wfc/logon" target="_blank">Kronos</a></li>
                         </ul>
                     </Container>
                 </Col>
