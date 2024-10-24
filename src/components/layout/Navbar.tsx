@@ -68,7 +68,7 @@ const MainNavbar = () => {
                             <h5>Cuenta Estudiantil - Okta</h5>
                             <NavDropdown.Divider />
                             <Row>
-                              <Col><a className="nav-link nav-dropdown-item" href="#">Okta Dashboard</a></Col>
+                              <Col><a className="nav-link nav-dropdown-item" href="https://inter.okta.com">Okta Dashboard</a></Col>
                               <Col><a className="nav-link nav-dropdown-item" href="#">Unlock Account</a></Col>
                               <Col><a className="nav-link nav-dropdown-item" href="#">Reset Password</a></Col>
                             </Row>
