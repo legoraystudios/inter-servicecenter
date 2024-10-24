@@ -69,7 +69,7 @@ const MainNavbar = () => {
                             <NavDropdown.Divider />
                             <Row>
                               <Col><a className="nav-link nav-dropdown-item" href="https://inter.okta.com">Okta Dashboard</a></Col>
-                              <Col><a className="nav-link nav-dropdown-item" href="#">Unlock Account</a></Col>
+                              <Col><a className="nav-link nav-dropdown-item" href="https://pwdreset.inter.edu:9251/showLogin.cc">Unlock Account</a></Col>
                               <Col><a className="nav-link nav-dropdown-item" href="#">Reset Password</a></Col>
                             </Row>
                             <Row>
