@@ -33,7 +33,7 @@ const MainNavbar = () => {
                         <Container className="nav-dropdown-menu">
                             <h5>Blackboard Learn</h5>
                             <NavDropdown.Divider />
-                            <a className="nav-link nav-dropdown-item" href="https://interbb.blackboard.edu" target="_blank">Blackboard Learn</a>
+                            <a className="nav-link nav-dropdown-item" href="https://interbb.blackboard.com" target="_blank">Blackboard Learn</a>
                             <h5>Educosoft (Para clases selectas solamente)</h5>
                             <NavDropdown.Divider />
                             <a className="nav-link nav-dropdown-item" href="https://educosoft.com/" target="_blank">Educosoft.com</a>
