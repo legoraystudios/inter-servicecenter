@@ -31,7 +31,7 @@ const Home = () => {
                         <Card className="mb-2">
                           <Card.Img variant="top" src={Announcement3} height={185} />
                           <Card.Body>
-                            <Card.Text><a className="green-link" href="#">Repasos de College Board - Libre de costo</a></Card.Text>
+                            <Card.Text><a className="green-link" href="http://localhost:3000/post">Repasos de College Board - Libre de costo</a></Card.Text>
                           </Card.Body>
                         </Card>
                     </Container>
@@ -60,7 +60,7 @@ const Home = () => {
                         <Card className="mb-2">
                           <Card.Img variant="top" src={Announcement3} height={185} />
                           <Card.Body>
-                            <Card.Text><a className="green-link" href="#">Repasos de College Board - Libre de costo</a></Card.Text>
+                            <Card.Text><a className="green-link" href="http://localhost:3000/post">Repasos de College Board - Libre de costo</a></Card.Text>
                           </Card.Body>
                         </Card>
                     </Container>
