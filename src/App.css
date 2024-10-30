@@ -1,5 +1,6 @@
 :root {
   --background-color-primary: #005C2F;
+  --background-color-primary-hover: #103a26;
   --background-color-secondary: #d5d5d5;
   --background-color-danger: #bb2d3b;
   --background-color-warning: #ffca2c;
@@ -9,11 +10,11 @@
 .btn-primary {
   --bs-btn-font-weight: 600;
   --bs-btn-color: var(--bs-white);
-  --bs-btn-bg: var(--background-color-primary);
-  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-bg: var(--background-color-primary) !important;
+  --bs-btn-border-color: var(--background-color-primary) !important;
   --bs-btn-hover-color: var(--bs-white);
-  --bs-btn-hover-bg: #{shade-color($bd-violet, 10%)};
-  --bs-btn-hover-border-color: #{shade-color($bd-violet, 10%)};
+  --bs-btn-hover-bg: var(--background-color-primary-hover) !important;
+  --bs-btn-hover-border-color: var(--background-color-primary) !important;
   --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
   --bs-btn-active-color: var(--bs-btn-hover-color);
   --bs-btn-active-bg: #{shade-color($bd-violet, 20%)};
@@ -25,7 +26,7 @@
 }
 
 .nav-link {
-  color: var(--background-color-primary);
+  color: var(--background-color-primary) !important;
 }
 
 .green-link {
@@ -53,12 +54,12 @@
   margin-bottom: -15px;
 }
 
-.bg-primary {
+.bg-primary, .text-bg-success {
   background-color: var(--background-color-primary) !important;
 }
 
 .nav-dropdown-menu {
-  width: 800px;
+  width: 800px !important;
 }
 
 .nav-dropdown-item {
@@ -77,8 +78,8 @@
 }
 
 .calendar-active-color {
-  background-color: var(--background-color-primary);
-  border-color: var(--background-color-primary);
+  background-color: var(--background-color-primary) !important;
+  border-color: var(--background-color-primary) !important;
 }
 
 .main-post {
