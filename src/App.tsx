@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect } from 'react';
 import Home from './routes/Home';
-import Admin from './routes/Admin';
 import Post from './routes/Post';
+import Login from './routes/Admin/Login';
+import Dashboard from './routes/Admin/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,8 +20,9 @@ function App() {
     <BrowserRouter basename="/">
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/admin" element={<Admin/>} />
         <Route path="/post" element={<Post/>} />
+        <Route path="/admin" element={<Login/>} />
+        <Route path="/admin/dashboard" element={<Dashboard/>} />
       </Routes>
     </BrowserRouter>
   );
