@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Signout from './routes/Admin/Signout';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/post" element={<Post/>} />
         <Route path="/admin" element={<Login/>} />
         <Route path="/admin/dashboard" element={<Dashboard/>} />
+        <Route path="/admin/signout" element={<Signout/>} />
       </Routes>
     </BrowserRouter>
   );
