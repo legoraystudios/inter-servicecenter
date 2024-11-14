@@ -32,7 +32,7 @@ const Admin: React.FC = () => {
         Remember: rememberSession
       }).then(function (response) {
         if (response.status === 200) {
-          setCookie(cookieName, response.data.msg)
+          setCookie(cookieName, response.data.msg, { path:  "/" })
           navigate("/admin/dashboard");
         }
       }).catch(function (error) {

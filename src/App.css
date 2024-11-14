@@ -107,7 +107,7 @@
   font-weight: bold; /* Make the heading bold */
 }
 
-.email-link, .phone-link {
+.email-link, .phone-link, .link {
   color: green; /* Green color for links */
   text-decoration: none; /* Remove underline from the links */
   margin-left: 5px; /* Space between icon and text */
