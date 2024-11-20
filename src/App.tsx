@@ -6,13 +6,15 @@ import Post from './routes/Post';
 import Login from './routes/Admin/Login';
 import Dashboard from './routes/Admin/Dashboard';
 import StatusbarMessages from './routes/Admin/StatusbarMessage';
+import Signout from './routes/Admin/Signout';
+import Statusbar from './routes/Admin/Statusbar';
+import StatusbarProperties from './routes/Admin/StatusbarProperties';
+import PostList from './routes/Admin/PostList';
+import PostDetail from './routes/Admin/PostDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Signout from './routes/Admin/Signout';
-import Statusbar from './routes/Admin/Statusbar';
-import StatusbarProperties from './routes/Admin/StatusbarProperties';
 
 function App() {
 
@@ -30,6 +32,8 @@ function App() {
         <Route path="/admin/statusbar" element={<Statusbar/>} />
         <Route path="/admin/statusbar/properties" element={<StatusbarProperties/>} />
         <Route path="/admin/statusbar/:id" element={<StatusbarMessages/>} />
+        <Route path="/admin/posts" element={<PostList/>} />
+        <Route path="/admin/post/:id" element={<PostDetail/>} />
         <Route path="/admin/signout" element={<Signout/>} />
       </Routes>
     </BrowserRouter>
