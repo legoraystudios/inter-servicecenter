@@ -82,21 +82,21 @@ const Posts = () => {
     
     )}
 
-    const deleteStatusMessage = async (id: number) => {
+    const deletePost = async (id: number) => {
 
-      await axios.delete(`${process.env.REACT_APP_BACKEND_HOST}/api/statusbar/messages/${id}`, {
+      await axios.delete(`${process.env.REACT_APP_BACKEND_HOST}/api/post/${id}`, {
         headers: {
             Authorization: `Bearer ${cookieContent}`,
           },
       }
       ).then(function (response) {
         if (response.status === 200) {
-          setAlertMessage({message: "Message deleted successfully!", variant: "success" });
+          setAlertMessage({message: "Post deleted successfully!", variant: "success" });
           getPosts();
         }
       }).catch(function (error) {
         if (error.response.status !== 200) {
-          setAlertMessage({message: "ERROR: An error has occured while deleting the message.", variant: "danger" });
+          setAlertMessage({message: "ERROR: An error has occured while deleting the post.", variant: "danger" });
         } 
       }
   
@@ -167,6 +167,24 @@ const Posts = () => {
                                                 <td>
                                                   <Button className='mx-1' variant="info" href={`/admin/post/${record.id}`}><i className="bi bi-pencil-square"></i></Button>
                                                   <Button className='mx-1' variant="danger" data-bs-toggle="modal" data-bs-target={`#deletePost-${record.id}`}><i className="bi bi-trash3"></i></Button>
+                                                  {/* Confirm Deletion Modal */}
+                                                  <div className="modal fade" id={`deletePost-${record.id}`} tabIndex={-1} aria-labelledby={`deletePost-${record.id}`} aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                      <div className="modal-content">
+                                                        <div className="modal-header">
+                                                          <h1 className="modal-title fs-5" id="exampleModalLabel">Confirm Deletion | ID: #{record.id}</h1>
+                                                          <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                          Are you sure you want to delete this post? THIS ACTION CANNOT BE UNDONE!
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                          <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => deletePost(record.id)}>DELETE POST</button>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
                                                 </td>
                                               </tr>
                                             </>

@@ -6,8 +6,8 @@ import SVGCSA from "../images/SVGCSA.png";
 const Footer = () => {
 
     return(
-        <div>
-            <Container className="developer-footer-bar text-white fixed-bottom" fluid>
+        <div className='footer'>
+            <Container className="developer-footer-bar text-white mt-auto fixed-bottom" fluid>
                 <p>
                     Developed and designed by <a href="https://legoray.com" target="_blank"><img src={LegorayLogo} height={30} /></a> on behalf from the <img src={SVGCSA} height={50} />
                 </p>

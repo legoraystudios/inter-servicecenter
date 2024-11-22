@@ -23,8 +23,8 @@ const Home = () => {
   }
 
   const [posts, setPosts] = useState<PostContent[]>([]);
-  const [currentPage, setCurrentPage] = useState(5);
-  const postsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(2);
+  const postsPerPage = 5;
 
   // Truncate Content (Truncate words from a sentence to be more shorter).
   const truncateContent = (content: any, wordLimit: any) => {
@@ -32,21 +32,28 @@ const Home = () => {
     return words.slice(0, wordLimit).join(' ') + '...';
   };
 
-  const getPosts = async () => {
+  const currentPosts = posts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
 
-    await axios.get(`${process.env.REACT_APP_BACKEND_HOST}/api/post`,
-    ).then(function (response) {
-      if (response.status === 200) {
-        setPosts(response.data.$values)
-      }
-    }).catch(function (error) {
-
-    }
-
-  )}
+  const loadMorePosts = () => {
+    setCurrentPage(currentPage + 1);
+  };
 
 
   useEffect(() => {
+
+    const getPosts = async () => {
+
+      await axios.get(`${process.env.REACT_APP_BACKEND_HOST}/api/post`,
+      ).then(function (response) {
+        if (response.status === 200) {
+          setPosts(response.data.$values);
+        }
+      }).catch(function (error) {
+  
+      }
+  
+    )}
+
     getPosts();
     // eslint-disable-next-line
   }, []);
@@ -186,27 +193,42 @@ const Home = () => {
                 )
               }
             </Container>
-            <Container className="d-flex justify-content-center mt-3">
-              <Button variant="link" className="nav-link nav-dropdown-item">View past posts <i className="bi bi-chevron-double-down"></i></Button>
-            </Container>
 
-            <Container className="my-3 p-3 border border-1 rounded" >
-              <Row>
-                <Col xs={2}>
-                  <img src={Image} height={120} />
-                </Col>
-                <Col>
-                  <Card.Title><a className="green-link" href="#">Lorem Ipsum</a></Card.Title>
-                  <Card.Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's </Card.Text>
-                  <div>
-                    <p>
-                      <i className="bi bi-calendar-week text-success"></i> 20 de diciembre de 2024 <br />
-                      <i className="bi bi-person-fill text-success"></i> Creado por Raymond Negron
-                    </p>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
+            {currentPosts.map((post, index) => (
+              <Container key={index} className="my-3 p-3 border border-1 rounded" >
+                <Row>
+                  <Col xs={2}>
+                  {
+                      post.frontBannerFile ? (
+                        <>
+                          <img src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${post.id}/banner`} height={120} />
+                        </>
+                      ) : (
+                        <>
+                          <img src={Image} height={120} />
+                        </>
+                      )
+                  }
+                  </Col>
+                  <Col>
+                    <Card.Title><a className="green-link" href="#">{post.title}</a></Card.Title>
+                    <Card.Text>{truncateContent(posts[0].content, 20)}</Card.Text>
+                    <div>
+                      <p>
+                        <i className="bi bi-calendar-week text-success"></i> {post.publishedAt} <br />
+                        <i className="bi bi-person-fill text-success"></i> Creado por {post.authorName}
+                      </p>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            ))}
+
+            {currentPage * postsPerPage < posts.length && (
+              <Container className="d-flex justify-content-center mt-3">
+                <Button variant="link" className="nav-link nav-dropdown-item" onClick={loadMorePosts}>View past posts <i className="bi bi-chevron-double-down"></i></Button>
+              </Container>
+            )}
 
             {/*<Container className="mt-3 d-flex justify-content-center">
               <ListGroup className="" horizontal>
