@@ -5,9 +5,6 @@ import MainNavbar from "../components/layout/Navbar";
 import ComponentBar from "../components/layout/ComponentBar";
 import Footer from "../components/layout/Footer";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import Announcement1 from "../components/images/sample-images/announcement1.png";
-import Announcement2 from "../components/images/sample-images/announcement2.png";
-import Announcement3 from "../components/images/sample-images/announcement3.png";
 import Image from "../components/images/image.jpg";
 
 const Home = () => {
@@ -89,7 +86,7 @@ const Home = () => {
                                         )
                                     }
                                     <Card.Body>
-                                      <Card.Text><a className="green-link" href="#">{posts[1].title}</a></Card.Text>
+                                      <Card.Text><a className="green-link" href={`/post/${posts[1].id}`}>{posts[1].title}</a></Card.Text>
                                     </Card.Body>
                                   </Card>
                                 )
@@ -109,7 +106,7 @@ const Home = () => {
                                         )
                                     }
                                     <Card.Body>
-                                      <Card.Text><a className="green-link" href="#">{posts[2].title}</a></Card.Text>
+                                      <Card.Text><a className="green-link" href={`/post/${posts[2].id}`}>{posts[2].title}</a></Card.Text>
                                     </Card.Body>
                                   </Card>
                                 )
@@ -133,7 +130,7 @@ const Home = () => {
                                     )
                                   }
                                   <Card.Body>
-                                    <Card.Title><a className="green-link" href="#">{posts[0].title}</a></Card.Title>
+                                    <Card.Title><a className="green-link" href={`/post/${posts[0].id}`}>{posts[0].title}</a></Card.Title>
                                     <Card.Text>
                                     {truncateContent(posts[0].content, 20)}
                                     </Card.Text>
@@ -161,7 +158,7 @@ const Home = () => {
                                         )
                                     }
                                     <Card.Body>
-                                      <Card.Text><a className="green-link" href="#">{posts[3].title}</a></Card.Text>
+                                      <Card.Text><a className="green-link" href={`/post/${posts[3].id}`}>{posts[3].title}</a></Card.Text>
                                     </Card.Body>
                                   </Card>
                                 )
@@ -181,7 +178,7 @@ const Home = () => {
                                         )
                                     }
                                     <Card.Body>
-                                      <Card.Text><a className="green-link" href="#">{posts[4].title}</a></Card.Text>
+                                      <Card.Text><a className="green-link" href={`/post/${posts[4].id}`}>{posts[4].title}</a></Card.Text>
                                     </Card.Body>
                                   </Card>
                                 )
@@ -211,7 +208,7 @@ const Home = () => {
                   }
                   </Col>
                   <Col>
-                    <Card.Title><a className="green-link" href="#">{post.title}</a></Card.Title>
+                    <Card.Title><a className="green-link" href={`/post/${post.id}`}>{post.title}</a></Card.Title>
                     <Card.Text>{truncateContent(posts[0].content, 20)}</Card.Text>
                     <div>
                       <p>

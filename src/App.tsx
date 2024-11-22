@@ -26,7 +26,7 @@ function App() {
     <BrowserRouter basename="/">
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/post" element={<Post/>} />
+        <Route path="/post/:id" element={<Post/>} />
         <Route path="/admin" element={<Login/>} />
         <Route path="/admin/dashboard" element={<Dashboard/>} />
         <Route path="/admin/statusbar" element={<Statusbar/>} />
