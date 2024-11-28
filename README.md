@@ -1,46 +1,36 @@
-# Getting Started with Create React App
+# INTER - Student Service Center
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Centro de Servicios Estudiantiles Inter Fajardo](https://media.discordapp.net/attachments/1297935209735524353/1310598757162680320/InterServiceCenter-Logo.png?ex=67471f35&is=6745cdb5&hm=0eb098a00ad83f402e06cce9e18a7e4d796d19ed7f186765df4df7ed7181ca39&=&format=webp&quality=lossless&width=881&height=245)
 
-## Available Scripts
 
-In the project directory, you can run:
+<p style="text-align:center"> A ReactJS/Node open-source and cross-platform institutional website with added features that make it easier to access new publications and announcements.</p>
 
-### `npm start`
+![Main Page](https://cdn.discordapp.com/attachments/1297935209735524353/1310598757691424849/InterServiceCenter.png?ex=67471f35&is=6745cdb5&hm=e165709bc57f642f348f491669911765154b1e687c4e2f656b6abbad2a90cfa5&)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Features
+* 💻📲 Cross-platform support → A fully responsive web-based application that fits every screen.
+* 🚀 Native performance → Optimized with React for fast, responsive, and smooth cross-platform functionality, ensuring quick access to publications and announcements.
+* Open-source software 
+* Status Bar → Displays essential updates and critical announcements about the campus status to keep students informed. 
+* Administrative Panel → A custom panel where promotion staff can manage publications and announcements.
+* Enhanced access to student tools, making it easier for every academic process.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+# 👨💻 Our development team
+* [Raymond](https://github.com/legoraystudios) - Project Manager, Back-end 
+* [Xander](https://github.com/XLRock) - Front-End
+* [Nikioly](https://github.com/NikM210) - Front-End
+* [Jason](https://github.com/CodingArcadio112001) - Documentation in English
+* [Sofia](https://github.com/SOF07070) - Documentation in Spanish
+* [Alejandro](https://github.com/Alexnt17) - Software Testing
+* [Edwin](https://github.com/edwind29) - Software Testing
+* [Arturo](https://github.com/Kir1975) - Project Secretary 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Licensing
+This project is licensed under the [MIT License](https://opensource.org/license/mit).
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Dependencies
+* [React](https://react.dev/) 
+* [Axios-HTTP](https://axios-http.com/)    
+* [Bootstrap 5](https://getbootstrap.com/)   
+* [Bootstrap Icons](https://icons.getbootstrap.com/) 
