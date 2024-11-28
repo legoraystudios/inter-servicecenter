@@ -17,16 +17,16 @@
 
 
 # 👨💻 Our development team
-* [Raymond](https://github.com/legoraystudios) - Project Manager, Back-end 
-* [Xander](https://github.com/XLRock) - Front-End
-* [Nikioly](https://github.com/NikM210) - Front-End
-* [Jason](https://github.com/CodingArcadio112001) - Documentation in English
-* [Sofia](https://github.com/SOF07070) - Documentation in Spanish
+* [Raymond](https://github.com/legoraystudios) - Project Manager, Full-Stack Developer 
+* [Xander](https://github.com/XLRock) - Front-End Developer
+* [Nikioly](https://github.com/NikM210) - Front-End Developer
+* [Jason](https://github.com/CodingArcadio112001) - English Documentation
+* [Sofia](https://github.com/SOF07070) - Spanish Documentation
 * [Alejandro](https://github.com/Alexnt17) - Software Testing
 * [Edwin](https://github.com/edwind29) - Software Testing
 * [Arturo](https://github.com/Kir1975) - Project Secretary 
 
-# Licensing
+# Licensing ⚖️
 This project is licensed under the [MIT License](https://opensource.org/license/mit).
 
 # Dependencies
