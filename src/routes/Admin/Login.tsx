@@ -33,7 +33,7 @@ const Admin: React.FC = () => {
       }).then(function (response) {
         if (response.status === 200) {
           setCookie(cookieName, response.data.msg, { path:  "/" })
-          navigate("/admin/dashboard");
+          navigate(`/admin/dashboard`);
         }
       }).catch(function (error) {
         if (error.response.status !== 200) {

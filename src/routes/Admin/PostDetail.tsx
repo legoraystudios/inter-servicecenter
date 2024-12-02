@@ -206,7 +206,7 @@ const PostDetail = () => {
             <Navbar3 />
                 <Container className="mt-5">
                     <Container>
-                      <a className="link" href="/admin/posts"><i className="bi bi-arrow-90deg-up"></i> Go back to Post List</a>
+                      <a className="link" href={`${process.env.REACT_APP_BASENAME}/admin/posts`}><i className="bi bi-arrow-90deg-up"></i> Go back to Post List</a>
                       {
                         post ? (
                           <h3>Post #{post.id}</h3>
@@ -261,7 +261,7 @@ const PostDetail = () => {
                         </Form.Group>
                         <div className="d-flex justify-content-end mt-3">
                             <Button className='mx-2' variant="primary" type='submit'>Save Changes</Button>
-                            <Button variant="secondary" href="/admin/posts">Cancel</Button>
+                            <Button variant="secondary" href={`${process.env.REACT_APP_BASENAME}/admin/posts`}>Cancel</Button>
                         </div>
                       </Form>
                     </div>

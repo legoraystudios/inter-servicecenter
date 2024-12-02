@@ -62,10 +62,10 @@ const Navbar3 = () => {
                     style={{ maxHeight: '100px' }}
                     navbarScroll
                   >
-                    <Nav.Link href="/admin/dashboard">Dashboard Overview</Nav.Link>
-                    <Nav.Link href="/admin/posts">Posts</Nav.Link>
+                    <Nav.Link href={`${process.env.REACT_APP_BASENAME}/admin/dashboard`}>Dashboard Overview</Nav.Link>
+                    <Nav.Link href={`${process.env.REACT_APP_BASENAME}/admin/posts`}>Posts</Nav.Link>
                     <NavDropdown title="Tools" id="basic-nav-dropdown">
-                      <NavDropdown.Item href="/admin/statusbar">Status Bar <span className="badge text-bg-success">New</span></NavDropdown.Item>
+                      <NavDropdown.Item href={`${process.env.REACT_APP_BASENAME}/admin/statusbar`}>Status Bar <span className="badge text-bg-success">New</span></NavDropdown.Item>
                     </NavDropdown>
                   </Nav>
                     <NavDropdown title={
@@ -74,7 +74,7 @@ const Navbar3 = () => {
                       )} id="basic-nav-dropdown" className="me-3">
                       <NavDropdown.Item href="#"><i className="bi bi-person-fill"></i> My Account</NavDropdown.Item>
                       <NavDropdown.Item href="#"><i className="bi bi-shield-lock"></i> Employee Management</NavDropdown.Item>
-                      <NavDropdown.Item href="/admin/signout" className="text-danger"><i className="bi bi-box-arrow-in-right"></i> Sign Out</NavDropdown.Item>
+                      <NavDropdown.Item href={`${process.env.REACT_APP_BASENAME}/admin/signout`} className="text-danger"><i className="bi bi-box-arrow-in-right"></i> Sign Out</NavDropdown.Item>
                     </NavDropdown>
                 </Navbar.Collapse>
               </Container>

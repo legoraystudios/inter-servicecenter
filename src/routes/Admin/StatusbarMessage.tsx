@@ -165,7 +165,7 @@ const StatusbarMessage = () => {
                     <Container>
                       <Row>
                         <Col>
-                            <a className="link" href="/admin/statusbar"><i className="bi bi-arrow-90deg-up"></i> Go back to List</a>
+                            <a className="link" href={`${process.env.REACT_APP_BASENAME}/admin/statusbar`}><i className="bi bi-arrow-90deg-up"></i> Go back to List</a>
                             
                                     {
                                         statusBarData ? (
@@ -217,7 +217,7 @@ const StatusbarMessage = () => {
 
                           <div className="d-flex justify-content-end mt-3">
                             <Button className='mx-2' variant="primary" type='submit'>Save Changes</Button>
-                            <Button variant="secondary" href="/admin/statusbar">Cancel</Button>
+                            <Button variant="secondary" href={`${process.env.REACT_APP_BASENAME}/admin/statusbar`}>Cancel</Button>
                           </div>
                         </Form>
                     </div>

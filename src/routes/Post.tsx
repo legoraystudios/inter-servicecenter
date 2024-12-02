@@ -55,7 +55,7 @@ const Post = () => {
                     <>
                         <Container className="mt-5">
                             <div className="mb-3">
-                                <a className="link" href="/"><i className="bi bi-arrow-90deg-up"></i> <i className="bi bi-house"></i> Inicio</a>
+                                <a className="link" href={`${process.env.REACT_APP_BASENAME}/`}><i className="bi bi-arrow-90deg-up"></i> <i className="bi bi-house"></i> Inicio</a>
                             </div>
                             <Row>
                                 {/*Main Post*/}

@@ -119,7 +119,7 @@ const Statusbar = () => {
                     <Container>
                       <Row>
                         <Col>
-                            <a className="link" href="/admin/dashboard"><i className="bi bi-arrow-90deg-up"></i> Go back to Dashboard</a>
+                            <a className="link" href={`${process.env.REACT_APP_BASENAME}/admin/dashboard`}><i className="bi bi-arrow-90deg-up"></i> Go back to Dashboard</a>
                             <h3>Status Bar</h3>
                         </Col>
                       </Row>
@@ -140,8 +140,8 @@ const Statusbar = () => {
                     </Container>
 
                     <Container className="mt-3 d-flex justify-content-end">
-                        <Button className='mx-1' variant="primary" href="/admin/statusbar/new"><i className="bi bi-plus"></i> Add Message</Button>
-                        <Button className='mx-1' variant="secondary" href="/admin/statusbar/properties"><i className="bi bi-gear"></i> Properties</Button>
+                        <Button className='mx-1' variant="primary" href={`${process.env.REACT_APP_BASENAME}/admin/statusbar/new`}><i className="bi bi-plus"></i> Add Message</Button>
+                        <Button className='mx-1' variant="secondary" href={`${process.env.REACT_APP_BASENAME}/admin/statusbar/properties`}><i className="bi bi-gear"></i> Properties</Button>
                     </Container>
 
                     <div className='mt-3'>

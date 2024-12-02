@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/post/:id" element={<Post/>} />

@@ -115,7 +115,7 @@ const Posts = () => {
             <Navbar3 />
                 <Container className="mt-5">
                     <Container>
-                      <a className="link" href="/admin/dashboard"><i className="bi bi-arrow-90deg-up"></i> Go back to Dashboard</a>
+                      <a className="link" href={`${process.env.REACT_APP_BASENAME}/admin/dashboard`}><i className="bi bi-arrow-90deg-up"></i> Go back to Dashboard</a>
                       <h3>Posts</h3>
                     </Container>
 
@@ -126,7 +126,7 @@ const Posts = () => {
                     </Container>
 
                     <Container className="mt-3 d-flex justify-content-end">
-                        <Button className='mx-1' variant="primary" href="/admin/post/new"><i className="bi bi-newspaper"></i> Create Post</Button>
+                        <Button className='mx-1' variant="primary" href={`${process.env.REACT_APP_BASENAME}/admin/post/new`}><i className="bi bi-newspaper"></i> Create Post</Button>
                     </Container>
 
                     <div className='mt-3'>
