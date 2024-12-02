@@ -8,7 +8,7 @@ const Navbar2 = () => {
         <div>
             <Navbar expand="lg" className="bg-body-tertiary">
               <Container className="d-flex justify-content-center" fluid>
-                <Navbar.Brand href="/"><img src={NavLogo} height={70} /></Navbar.Brand>
+                <Navbar.Brand href={`${process.env.REACT_APP_BASENAME}/`}><img src={NavLogo} height={70} /></Navbar.Brand>
               </Container>
             </Navbar>
             <Container fluid className='green-navbar'></Container>

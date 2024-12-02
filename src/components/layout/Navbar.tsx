@@ -21,7 +21,7 @@ const MainNavbar = () => {
         <div>
             <Navbar expand="lg" className="bg-body-tertiary">
               <Container fluid>
-                <Navbar.Brand href="/"><img src={NavLogo} height={70} /></Navbar.Brand>
+                <Navbar.Brand href={`${process.env.REACT_APP_BASENAME}/`}><img src={NavLogo} height={70} /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                   <Nav

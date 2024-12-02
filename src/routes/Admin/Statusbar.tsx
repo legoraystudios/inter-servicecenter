@@ -173,7 +173,7 @@ const Statusbar = () => {
                                                   <td>{record.createdAt}</td>
                                                   <td>{record.expiresIn}</td>
                                                   <td className='px-3'>
-                                                    <Button className='mx-1' variant="info" href={`/admin/statusbar/${record.id}`}><i className="bi bi-pencil-square"></i></Button>
+                                                    <Button className='mx-1' variant="info" href={`${process.env.REACT_APP_BASENAME}/admin/statusbar/${record.id}`}><i className="bi bi-pencil-square"></i></Button>
                                                     <Button className='mx-1' variant="danger" data-bs-toggle="modal" data-bs-target={`#deleteMessage-${record.id}`}><i className="bi bi-trash3"></i></Button>
                                                       {/* Confirm Deletion Modal */}
                                                       <div className="modal fade" id={`deleteMessage-${record.id}`} tabIndex={-1} aria-labelledby={`deleteMessage-${record.id}`} aria-hidden="true">

@@ -165,7 +165,7 @@ const Posts = () => {
                                                 <td>{record.publishedAt}</td>
                                                 <td>{record.authorName}</td>
                                                 <td>
-                                                  <Button className='mx-1' variant="info" href={`/admin/post/${record.id}`}><i className="bi bi-pencil-square"></i></Button>
+                                                  <Button className='mx-1' variant="info" href={`${process.env.REACT_APP_BASENAME}/admin/post/${record.id}`}><i className="bi bi-pencil-square"></i></Button>
                                                   <Button className='mx-1' variant="danger" data-bs-toggle="modal" data-bs-target={`#deletePost-${record.id}`}><i className="bi bi-trash3"></i></Button>
                                                   {/* Confirm Deletion Modal */}
                                                   <div className="modal fade" id={`deletePost-${record.id}`} tabIndex={-1} aria-labelledby={`deletePost-${record.id}`} aria-hidden="true">
