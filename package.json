@@ -1,7 +1,7 @@
 {
   "name": "inter-servicecenter",
   "version": "0.1.0",
-  "homepage": "/InterServiceCenter",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -9,11 +9,13 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.108",
+    "@types/node-schedule": "^2.1.7",
     "@types/react": "^18.3.8",
     "@types/react-dom": "^18.3.0",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "moment": "^2.30.1",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-cookie": "^7.2.2",

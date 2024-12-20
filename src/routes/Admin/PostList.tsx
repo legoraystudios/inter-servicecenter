@@ -5,6 +5,8 @@ import Navbar3 from '../../components/layout/Navbar3';
 import Footer2 from '../../components/layout/Footer2';
 import { Container, Button, Row, Col, Table, Alert } from 'react-bootstrap';
 import axios from 'axios';
+import moment from 'moment';
+import 'moment/locale/es-us';
 import { useCookies } from 'react-cookie';
 
 const Posts = () => {
@@ -162,7 +164,7 @@ const Posts = () => {
                                                 }
                                                 <td>{record.title}</td>
                                                 <td>{truncateContent(record.content, 20)}</td>
-                                                <td>{record.publishedAt}</td>
+                                                <td>{moment(record.publishedAt).locale('es-us').format('L hh:mm:ss a')}</td>
                                                 <td>{record.authorName}</td>
                                                 <td>
                                                   <Button className='mx-1' variant="info" href={`${process.env.REACT_APP_BASENAME}/admin/post/${record.id}`}><i className="bi bi-pencil-square"></i></Button>

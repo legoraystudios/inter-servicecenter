@@ -5,6 +5,8 @@ import Navbar3 from '../../components/layout/Navbar3';
 import Footer2 from '../../components/layout/Footer2';
 import { Container, Button, Row, Col, Table, Alert } from 'react-bootstrap';
 import axios from 'axios';
+import moment from 'moment';
+import 'moment/locale/es-us';
 import { useCookies } from 'react-cookie';
 
 const Statusbar = () => {
@@ -170,8 +172,16 @@ const Statusbar = () => {
                                                   <td>{record.iconName}</td>
                                                   <td>{record.createdByName}</td>
                                                   <td>{record.modifiedByName}</td>
-                                                  <td>{record.createdAt}</td>
-                                                  <td>{record.expiresIn}</td>
+                                                  <td>{moment(record.createdAt).locale('es-us').format('L hh:mm:ss a')}</td>
+                                                  <td>
+                                                  {
+                                                    record.expiresIn ? (
+                                                      moment(record.expiresIn).locale('es-us').format('L hh:mm:ss a')
+                                                    ) : (
+                                                      ''
+                                                    )
+                                                  }
+                                                  </td>
                                                   <td className='px-3'>
                                                     <Button className='mx-1' variant="info" href={`${process.env.REACT_APP_BASENAME}/admin/statusbar/${record.id}`}><i className="bi bi-pencil-square"></i></Button>
                                                     <Button className='mx-1' variant="danger" data-bs-toggle="modal" data-bs-target={`#deleteMessage-${record.id}`}><i className="bi bi-trash3"></i></Button>

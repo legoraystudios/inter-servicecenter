@@ -53,7 +53,7 @@ const Dashboard = () => {
     return(
         <div>
             <Navbar3 />
-                <Container className="mt-5">
+                <Container className="mt-5 d-flex flex-column min-vh-100">
 
                     {
                       user && (
@@ -70,7 +70,7 @@ const Dashboard = () => {
                         <h4 className="text-center text-secondary">Dashboard Overview is under construction and will be available soon! In the meantime you can use the options on the top of the panel.</h4>
                     </div>
                 </Container>
-            <Footer2 />
+              <Footer2 />
         </div>
     )
 

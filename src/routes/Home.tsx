@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { Container, Button, Card, Row, Col, ListGroup } from "react-bootstrap";
+import { Container, Button, Card, Row, Col, ListGroup, Spinner } from "react-bootstrap";
 import axios from 'axios';
+import moment from 'moment';
+import 'moment/locale/es-us';
 import MainNavbar from "../components/layout/Navbar";
 import ComponentBar from "../components/layout/ComponentBar";
 import Footer from "../components/layout/Footer";
@@ -19,6 +21,7 @@ const Home = () => {
     authorName: string
   }
 
+  const [isLoaded, setIsLoaded] = useState(false);
   const [posts, setPosts] = useState<PostContent[]>([]);
   const [currentPage, setCurrentPage] = useState(2);
   const postsPerPage = 5;
@@ -44,6 +47,7 @@ const Home = () => {
       ).then(function (response) {
         if (response.status === 200) {
           setPosts(response.data.$values);
+          setIsLoaded(true);
         }
       }).catch(function (error) {
   
@@ -66,166 +70,179 @@ const Home = () => {
 
             <Container className="mt-4">
               {
-                posts && posts.length > 0 && (
+                isLoaded ? (
                   <>
-                    <Row>
-                      <Col sm>                    
-                          <Container>
-                          {
-                                posts[1] && (
-                                  <Card className="mb-2">
-                                    {
-                                        posts[1].frontBannerFile ? (
-                                          <>
-                                            <Card.Img variant="top" src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${posts[1].id}/banner`} height={187} />
-                                          </>
-                                        ) : (
-                                          <>
-                                            <Card.Img variant="top" src={Image} height={185} />
-                                          </>
-                                        )
-                                    }
-                                    <Card.Body>
-                                      <Card.Text><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${posts[1].id}`}>{posts[1].title}</a></Card.Text>
-                                    </Card.Body>
-                                  </Card>
-                                )
-                              }
+                  {
+                    posts && posts.length > 0 && (
+                      <>
+                        <Row>
+                          <Col sm>                    
+                              <Container>
                               {
-                                posts[2] && (
-                                  <Card className="mb-2">
-                                    {
-                                        posts[2].frontBannerFile ? (
-                                          <>
-                                            <Card.Img variant="top" src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${posts[2].id}/banner`} height={187} />
-                                          </>
-                                        ) : (
-                                          <>
-                                            <Card.Img variant="top" src={Image} height={185} />
-                                          </>
-                                        )
-                                    }
-                                    <Card.Body>
-                                      <Card.Text><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${posts[2].id}`}>{posts[2].title}</a></Card.Text>
-                                    </Card.Body>
-                                  </Card>
-                                )
-                              }
-                          </Container>
-                      </Col>
-                      <Col xs={6}>
-                          <Container>
-                            {
-                              posts[0] && (
-                                <Card>
-                                  {
-                                    posts[0].frontBannerFile ? (
-                                      <>
-                                        <Card.Img variant="top" src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${posts[0].id}/banner`} height={380} />
-                                      </>
-                                    ) : (
-                                      <>
-                                        <Card.Img variant="top" src={Image} height={380} />
-                                      </>
+                                    posts[1] && (
+                                      <Card className="mb-2">
+                                        {
+                                            posts[1].frontBannerFile ? (
+                                              <>
+                                                <Card.Img variant="top" src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${posts[1].id}/banner`} height={187} />
+                                              </>
+                                            ) : (
+                                              <>
+                                                <Card.Img variant="top" src={Image} height={185} />
+                                              </>
+                                            )
+                                        }
+                                        <Card.Body>
+                                          <Card.Text><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${posts[1].id}`}>{posts[1].title}</a></Card.Text>
+                                        </Card.Body>
+                                      </Card>
                                     )
                                   }
-                                  <Card.Body>
-                                    <Card.Title><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${posts[0].id}`}>{posts[0].title}</a></Card.Title>
-                                    <Card.Text>
-                                    {truncateContent(posts[0].content, 20)}
-                                    </Card.Text>
-                                  </Card.Body>
-                                </Card>
-                              )
-                            }
+                                  {
+                                    posts[2] && (
+                                      <Card className="mb-2">
+                                        {
+                                            posts[2].frontBannerFile ? (
+                                              <>
+                                                <Card.Img variant="top" src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${posts[2].id}/banner`} height={187} />
+                                              </>
+                                            ) : (
+                                              <>
+                                                <Card.Img variant="top" src={Image} height={185} />
+                                              </>
+                                            )
+                                        }
+                                        <Card.Body>
+                                          <Card.Text><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${posts[2].id}`}>{posts[2].title}</a></Card.Text>
+                                        </Card.Body>
+                                      </Card>
+                                    )
+                                  }
+                              </Container>
+                          </Col>
+                          <Col xs={6}>
+                              <Container>
+                                {
+                                  posts[0] && (
+                                    <Card>
+                                      {
+                                        posts[0].frontBannerFile ? (
+                                          <>
+                                            <Card.Img variant="top" src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${posts[0].id}/banner`} height={380} />
+                                          </>
+                                        ) : (
+                                          <>
+                                            <Card.Img variant="top" src={Image} height={380} />
+                                          </>
+                                        )
+                                      }
+                                      <Card.Body>
+                                        <Card.Title><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${posts[0].id}`}>{posts[0].title}</a></Card.Title>
+                                        <Card.Text>
+                                        {truncateContent(posts[0].content, 20)}
+                                        </Card.Text>
+                                      </Card.Body>
+                                    </Card>
+                                  )
+                                }
 
-                          </Container>
-                      </Col>
-                      <Col sm>
-                          <Container>
-                          {
-                                posts[3] && (
-                                  <Card className="mb-2">
-                                    {
-                                        posts[3].frontBannerFile ? (
-                                          <>
-                                            <Card.Img variant="top" src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${posts[3].id}/banner`} height={187} />
-                                          </>
-                                        ) : (
-                                          <>
-                                            <Card.Img variant="top" src={Image} height={185} />
-                                          </>
-                                        )
-                                    }
-                                    <Card.Body>
-                                      <Card.Text><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${posts[3].id}`}>{posts[3].title}</a></Card.Text>
-                                    </Card.Body>
-                                  </Card>
-                                )
-                              }
+                              </Container>
+                          </Col>
+                          <Col sm>
+                              <Container>
                               {
-                                posts[4] && (
-                                  <Card className="mb-2">
-                                    {
-                                        posts[4].frontBannerFile ? (
-                                          <>
-                                            <Card.Img variant="top" src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${posts[4].id}/banner`} height={187} />
-                                          </>
-                                        ) : (
-                                          <>
-                                            <Card.Img variant="top" src={Image} height={185} />
-                                          </>
-                                        )
-                                    }
-                                    <Card.Body>
-                                      <Card.Text><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${posts[4].id}`}>{posts[4].title}</a></Card.Text>
-                                    </Card.Body>
-                                  </Card>
-                                )
-                              }
-                          </Container>
-                      </Col>
-                    </Row>
+                                    posts[3] && (
+                                      <Card className="mb-2">
+                                        {
+                                            posts[3].frontBannerFile ? (
+                                              <>
+                                                <Card.Img variant="top" src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${posts[3].id}/banner`} height={187} />
+                                              </>
+                                            ) : (
+                                              <>
+                                                <Card.Img variant="top" src={Image} height={185} />
+                                              </>
+                                            )
+                                        }
+                                        <Card.Body>
+                                          <Card.Text><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${posts[3].id}`}>{posts[3].title}</a></Card.Text>
+                                        </Card.Body>
+                                      </Card>
+                                    )
+                                  }
+                                  {
+                                    posts[4] && (
+                                      <Card className="mb-2">
+                                        {
+                                            posts[4].frontBannerFile ? (
+                                              <>
+                                                <Card.Img variant="top" src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${posts[4].id}/banner`} height={187} />
+                                              </>
+                                            ) : (
+                                              <>
+                                                <Card.Img variant="top" src={Image} height={185} />
+                                              </>
+                                            )
+                                        }
+                                        <Card.Body>
+                                          <Card.Text><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${posts[4].id}`}>{posts[4].title}</a></Card.Text>
+                                        </Card.Body>
+                                      </Card>
+                                    )
+                                  }
+                              </Container>
+                          </Col>
+                        </Row>
+                      </>
+                    )
+                  }
+
+                  {currentPosts.map((post, index) => (
+                    <Container key={index} className="my-3 p-3 border border-1 rounded" >
+                      <Row>
+                        <Col xs={2}>
+                        {
+                            post.frontBannerFile ? (
+                              <>
+                                <img src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${post.id}/banner`} height={120} />
+                              </>
+                            ) : (
+                              <>
+                                <img src={Image} height={120} />
+                              </>
+                            )
+                        }
+                        </Col>
+                        <Col>
+                          <Card.Title><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${post.id}`}>{post.title}</a></Card.Title>
+                          <Card.Text>{truncateContent(posts[0].content, 20)}</Card.Text>
+                          <div>
+                            <p>
+                              <i className="bi bi-calendar-week text-success"></i> {moment(post.publishedAt).locale('es-us').format('LLLL')}<br />
+                              <i className="bi bi-person-fill text-success"></i> Creado por {post.authorName}
+                            </p>
+                          </div>
+                        </Col>
+                      </Row>
+                    </Container>
+                  ))}
+
+                  {currentPage * postsPerPage < posts.length && (
+                    <Container className="d-flex justify-content-center mt-3">
+                      <Button variant="link" className="nav-link nav-dropdown-item" onClick={loadMorePosts}>View past posts <i className="bi bi-chevron-double-down"></i></Button>
+                    </Container>
+                  )}
+                  </>
+                ) : (
+                  <>
+                    <Container className="text-center">
+                      <Spinner animation="grow" variant="success"/>
+                    </Container>
                   </>
                 )
               }
+
             </Container>
-
-            {currentPosts.map((post, index) => (
-              <Container key={index} className="my-3 p-3 border border-1 rounded" >
-                <Row>
-                  <Col xs={2}>
-                  {
-                      post.frontBannerFile ? (
-                        <>
-                          <img src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${post.id}/banner`} height={120} />
-                        </>
-                      ) : (
-                        <>
-                          <img src={Image} height={120} />
-                        </>
-                      )
-                  }
-                  </Col>
-                  <Col>
-                    <Card.Title><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${post.id}`}>{post.title}</a></Card.Title>
-                    <Card.Text>{truncateContent(posts[0].content, 20)}</Card.Text>
-                    <div>
-                      <p>
-                        <i className="bi bi-calendar-week text-success"></i> {post.publishedAt} <br />
-                        <i className="bi bi-person-fill text-success"></i> Creado por {post.authorName}
-                      </p>
-                    </div>
-                  </Col>
-                </Row>
-              </Container>
-            ))}
-
-            {currentPage * postsPerPage < posts.length && (
-              <Container className="d-flex justify-content-center mt-3">
-                <Button variant="link" className="nav-link nav-dropdown-item" onClick={loadMorePosts}>View past posts <i className="bi bi-chevron-double-down"></i></Button>
-              </Container>
-            )}
 
             {/*<Container className="mt-3 d-flex justify-content-center">
               <ListGroup className="" horizontal>
