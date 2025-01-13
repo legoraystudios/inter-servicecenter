@@ -117,7 +117,7 @@ const Statusbar = () => {
     return(
         <div>
             <Navbar3 />
-                <Container className="mt-5">
+                <Container className="mt-5 min-vh-100">
                     <Container>
                       <Row>
                         <Col>

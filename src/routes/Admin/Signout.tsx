@@ -12,7 +12,7 @@ const Signout = () => {
     const navigate = useNavigate()
 
     const signOut = async () => {
-        removeCookie(cookieName);
+        removeCookie(cookieName,  { path:  "/" });
         navigate("/admin");
     }
 

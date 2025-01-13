@@ -46,6 +46,9 @@ const Admin: React.FC = () => {
 
   useEffect(() => {
       document.title = "Login | Service Center";
+      if (cookies[cookieName]) {
+        navigate(`/admin/dashboard`);
+      }
     }, []);
 
   return(
