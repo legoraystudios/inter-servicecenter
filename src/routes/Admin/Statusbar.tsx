@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 import SampleImage from '../../components/images/Status-Bar-Example.png';
 import Navbar3 from '../../components/layout/Navbar3';
 import Footer2 from '../../components/layout/Footer2';
@@ -42,6 +43,9 @@ const Statusbar = () => {
 
     // Status Bar Message Data
     const [statusBarData, setStatusBarData] = useState<StatusBarContent[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const [postsPerPage, setPostsPerPage] = useState(5);
 
     // Alert Messages
     const [alertMessage, setAlertMessage] = useState<{ message: string; variant: string } | null>(null);
@@ -69,14 +73,15 @@ const Statusbar = () => {
 
     const getStatusBarMessages = async () => {
 
-        await axios.get(`${process.env.REACT_APP_BACKEND_HOST}/api/statusbar/messages`, {
+        await axios.get(`${process.env.REACT_APP_BACKEND_HOST}/api/statusbar/messages?page=1&pageSize=10`, {
           headers: {
               Authorization: `Bearer ${cookieContent}`,
             },
         }
         ).then(function (response) {
           if (response.status === 200) {
-            setStatusBarData(response.data.$values)
+            setStatusBarData(response.data.items.$values)
+            setTotalPages(response.data.totalPages);
           }
         }).catch(function (error) {
           if (error.response.status !== 200) {
@@ -105,6 +110,11 @@ const Statusbar = () => {
       }
   
   )}
+
+  const handlePageClick = (event: { selected: number; }) => {
+    setCurrentPage(event.selected + 1);
+    getStatusBarMessages();
+  };
     
 
     useEffect(() => {
@@ -210,7 +220,30 @@ const Statusbar = () => {
                                 })
                             }
                           </tbody>
-                        </Table>            
+                        </Table>       
+
+                        <div className="d-flex justify-content-center">
+                          <ReactPaginate
+                            breakLabel="..."
+                            nextLabel="›"
+                            pageRangeDisplayed={5}
+                            previousLabel="‹"
+                            onPageChange={handlePageClick}
+                            pageClassName="page-item"
+                            pageLinkClassName="page-link"
+                            previousClassName="page-item"
+                            previousLinkClassName="page-link"
+                            nextClassName="page-item"
+                            nextLinkClassName="page-link"
+                            breakClassName="page-item"
+                            breakLinkClassName="page-link"
+                            containerClassName="pagination"
+                            activeClassName="active"
+                            pageCount={totalPages} 
+                            marginPagesDisplayed={0}
+                          />
+                        </div>
+
                     </div>
 
 

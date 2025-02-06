@@ -65,7 +65,8 @@ const Navbar3 = () => {
                     <Nav.Link href={`${process.env.REACT_APP_BASENAME}/admin/dashboard`}>Dashboard Overview</Nav.Link>
                     <Nav.Link href={`${process.env.REACT_APP_BASENAME}/admin/posts`}>Posts</Nav.Link>
                     <NavDropdown title="Tools" id="basic-nav-dropdown">
-                      <NavDropdown.Item href={`${process.env.REACT_APP_BASENAME}/admin/statusbar`}>Status Bar <span className="badge text-bg-success">New</span></NavDropdown.Item>
+                      <NavDropdown.Item href={`${process.env.REACT_APP_BASENAME}/admin/statusbar`}>Status Bar</NavDropdown.Item>
+                      <NavDropdown.Item href={`${process.env.REACT_APP_BASENAME}/admin/directory`}>Phone Directory <span className="badge text-bg-success">New</span></NavDropdown.Item>
                     </NavDropdown>
                   </Nav>
                     <NavDropdown title={

@@ -21,6 +21,13 @@
   --bs-btn-active-border-color: #{shade-color($bd-violet, 20%)};
 }
 
+.page-item.active .page-link {
+  z-index: 3;
+  background-color: var(--background-color-primary) !important;
+  border-color: var(--background-color-primary) !important;
+  color: white;
+}
+
 .text-secondary {
   color: var(--background-color-secondary) !important;
 }

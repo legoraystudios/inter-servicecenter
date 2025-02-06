@@ -218,7 +218,7 @@ const Dashboard = () => {
                   </>
                 ) : (
                   <>
-                    <Container className="text-center">
+                    <Container className="text-center min-vh-100">
                       <Spinner animation="grow" variant="success"/>
                     </Container>
                   </>
