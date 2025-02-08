@@ -16,6 +16,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import PhoneDirectory from './routes/Admin/Directory';
+import DirectoryDepartmentDetail from './routes/Admin/DirectoryDepartmentDetail';
+import DirectoryPersonDetail from './routes/Admin/DirectoryPersonDetail';
 
 function App() {
 
@@ -34,6 +36,8 @@ function App() {
         <Route path="/admin/statusbar/properties" element={<StatusbarProperties/>} />
         <Route path="/admin/statusbar/:id" element={<StatusbarMessages/>} />
         <Route path="/admin/directory" element={<PhoneDirectory/>} />
+        <Route path="/admin/directory/department/:id" element={<DirectoryDepartmentDetail/>} />
+        <Route path="/admin/directory/person/:id" element={<DirectoryPersonDetail/>} />
         <Route path="/admin/posts" element={<PostList/>} />
         <Route path="/admin/post/:id" element={<PostDetail/>} />
         <Route path="/admin/signout" element={<Signout/>} />

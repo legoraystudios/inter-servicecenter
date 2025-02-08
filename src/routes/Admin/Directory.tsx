@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import SampleImage from '../../components/images/Status-Bar-Example.png';
 import Navbar3 from '../../components/layout/Navbar3';
 import Footer2 from '../../components/layout/Footer2';
-import { Container, Button, Row, Col, Card, Alert, Badge, Accordion } from 'react-bootstrap';
+import { Container, Button, Row, Col, Card, Alert, Badge, Accordion, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/locale/es-us';
@@ -19,18 +19,45 @@ const PhoneDirectory = () => {
         email: string,
     }
 
-    interface StatusBarContent {
+    interface DirectoryContent {
+      id: number,
+      departmentName: string,
+      departmentDescription: string,
+      addressNote: string,
+      facilityPhoneNumberId: number,
+      phoneNumber: string,
+      phoneExtension: string,
+      facilityId: number,
+      facility: DirectoryFacilityContent,
+      people: DirectoryPeopleContent
+    }
+
+    interface DirectoryFacilityContent {
+      id: number,
+      facilityName: string,
+      addressLineOne: string,
+      addressLineTwo: string,
+      city: string,
+      state: number,
+      stateName: string,
+      stateCode: string,
+      zipCode: string,
+    }
+
+    interface DirectoryPeopleContent {
+      $values: [
         id: number,
-        message: string,
-        icon: number,
-        createdBy: number,
-        createdByName: string,
-        modifiedBy: number,
-        modifiedByName: string,
-        createdAt: any,
-        modifiedAt: number,
-        expiresIn: any,
-        iconName: string
+        firstName: string,
+        lastName: string,
+        jobPosition: string,
+        facilityPhoneNumberId: number,
+        phoneNumber: string,
+        phoneExtension: 2270,
+        corporateCellphone: string,
+        email: string,
+        directoryDepartmentId: number,
+        departmentName: string,
+      ]
     }
 
     // Cookies Properties
@@ -38,14 +65,13 @@ const PhoneDirectory = () => {
     const [cookies, setCookie] = useCookies([cookieName]);
     const cookieContent = cookies[cookieName];
 
+    const [isLoading, setIsLoading] = useState(false);
+
     // Logged User Data
     const [user, setUser] = useState<UserProperties>();
 
-    // Status Bar Message Data
-    const [statusBarData, setStatusBarData] = useState<StatusBarContent[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
-    const [postsPerPage, setPostsPerPage] = useState(5);
+    // Directory Data
+    const [directoryData, setDirectoryData] = useState<DirectoryContent[]>([]);
 
     // Alert Messages
     const [alertMessage, setAlertMessage] = useState<{ message: string; variant: string } | null>(null);
@@ -71,56 +97,32 @@ const PhoneDirectory = () => {
   
       )}
 
-    const getStatusBarMessages = async () => {
+    const getDirectoryDepartments = async () => {
 
-        await axios.get(`${process.env.REACT_APP_BACKEND_HOST}/api/statusbar/messages?page=1&pageSize=10`, {
+        await axios.get(`${process.env.REACT_APP_BACKEND_HOST}/api/directory/department`, {
           headers: {
               Authorization: `Bearer ${cookieContent}`,
             },
         }
         ).then(function (response) {
           if (response.status === 200) {
-            setStatusBarData(response.data.items.$values)
-            setTotalPages(response.data.totalPages);
+            setDirectoryData(response.data.$values);
+            setIsLoading(true);
+            console.log(directoryData);
           }
         }).catch(function (error) {
           if (error.response.status !== 200) {
-            setAlertMessage({message: "ERROR: An error has occured while gathering current messages.", variant: "danger" });
+            setAlertMessage({message: "ERROR: An error has occured while gathering the directory.", variant: "danger" });
           } 
         }
     
     )}
-
-    const deleteStatusMessage = async (id: number) => {
-
-      await axios.delete(`${process.env.REACT_APP_BACKEND_HOST}/api/statusbar/messages/${id}`, {
-        headers: {
-            Authorization: `Bearer ${cookieContent}`,
-          },
-      }
-      ).then(function (response) {
-        if (response.status === 200) {
-          setAlertMessage({message: "Message deleted successfully!", variant: "success" });
-          getStatusBarMessages();
-        }
-      }).catch(function (error) {
-        if (error.response.status !== 200) {
-          setAlertMessage({message: "ERROR: An error has occured while deleting the message.", variant: "danger" });
-        } 
-      }
-  
-  )}
-
-  const handlePageClick = (event: { selected: number; }) => {
-    setCurrentPage(event.selected + 1);
-    getStatusBarMessages();
-  };
     
 
     useEffect(() => {
         document.title = "Phone Directory | Service Center";
         checkIfSignedIn();
-        getStatusBarMessages();
+        getDirectoryDepartments();
         // eslint-disable-next-line
       }, []);
 
@@ -144,156 +146,212 @@ const PhoneDirectory = () => {
                     </Container>
 
                     <Container className="mt-3 d-flex justify-content-end">
-                        <Button className='mx-1' variant="primary" href={`${process.env.REACT_APP_BASENAME}/admin/directory/new`}><i className="bi bi-journal-plus"></i> Add Contact</Button>
+                        <Button className='mx-1' variant="primary" href={`${process.env.REACT_APP_BASENAME}/admin/directory/person/new`}><i className="bi bi-journal-plus"></i> Add Contacts</Button>
                         <Button className='mx-1' variant="secondary" href={`${process.env.REACT_APP_BASENAME}/admin/directory/department/new`}><i className="bi bi-node-plus"></i> Add Department</Button>
                     </Container>
 
                     <div className='mt-3'>
+                      <Accordion defaultActiveKey="1">
 
-                    <Accordion defaultActiveKey="0">
-                      <Accordion.Item eventKey="0">
-                        <Accordion.Header>
-                          Asistencia Económica
-                          <Container className='d-flex justify-content-end'>
-                            <Button variant="info" className='me-2'><i className="bi bi-pencil-square"></i></Button>
-                            <Button variant="danger"><i className="bi bi-trash3"></i></Button>
-                          </Container>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                        <Container className="">
-                          <Container className='my-3'>
-                            <Row className='mb-2'>
-                              <Col xs={1}>
-                                <i className="bi bi-info fs-5"></i>
-                              </Col>
-                              <Col>
-                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                              </Col>
-                            </Row>
-                            <Row>
-                              <Col xs={1}>
-                                <i className="bi bi-geo-alt"></i>
-                              </Col>
-                              <Col>
-                              <p>
-                                La Casona - 1er Nivel <br />
-                                Calle Unión Batey Central Carr. 195 <br />
-                                Fajardo, PR 00738-7003
-                              </p>
-                              </Col>
-                              <Col xs={1}>
-                                <i className="bi bi-telephone"></i>
-                              </Col>
-                              <Col>
-                                <p>
-                                  (787) 863-2390
-                                </p>
-                              </Col>
-                              <Col xs={1}>
-                                <i className="bi bi-list-ol"></i>
-                              </Col>
-                              <Col>
-                                <p>
-                                2309
-                                </p>
-                              </Col>
-                            </Row>
-                          </Container>
-                          <Container className='d-flex flex-wrap'>
-                            
-                            <Card style={{ width: '25rem' }}>
-                              <Card.Body>
-                                <Row>
-                                  <Col>
-                                    <Card.Subtitle className="mb-2 text-muted">Marilyn Martínez</Card.Subtitle>
-                                    <Badge bg="dark">Técnica de Servicio de Matrícula</Badge>
-                                    <Row>
-                                      <Col xs={1}>
-                                        <i className="bi bi-geo-alt"></i>
-                                      </Col>
-                                      <Col>
-                                        <p>
-                                          La Casona - 1er Nivel <br />
-                                          Calle Unión Batey Central Carr. 195 <br />
-                                          Fajardo, PR 00738-7003
-                                        </p>
-                                      </Col>
-                                    </Row>
-                                    <Row>
-                                      <Col xs={1}>
-                                        <i className="bi bi-telephone"></i>
-                                      </Col>
-                                      <Col>
-                                        <p>
-                                          (787) 863-2390
-                                        </p>
-                                      </Col>
-                                      <Col xs={1}>
-                                        <i className="bi bi-list-ol"></i>
-                                      </Col>
-                                      <Col>
-                                        <p>
-                                        2309
-                                        </p>
-                                      </Col>
-                                    </Row>
-                                    <Row>
-                                      <Col xs={1}>
-                                        <i className="bi bi-phone"></i>
-                                      </Col>
-                                      <Col>
-                                        <p>
-                                          (939) 000-0000
-                                        </p>
-                                      </Col>
-                                    </Row>
-                                    <Row>
-                                      <Col xs={1}>
-                                        <i className="bi bi-envelope"></i>
-                                      </Col>
-                                      <Col>
-                                        <p>
-                                          ivonne.velez@fajardo.inter.edu
-                                        </p>
-                                      </Col>
-                                    </Row>
-                                  </Col>
-                                  <Col className='text-center'>
-                                    <Button variant="info" className='me-2'><i className="bi bi-pencil-square"></i></Button>
-                                    <Button variant="danger"><i className="bi bi-trash3"></i></Button>
-                                  </Col>
-                                </Row>
-                              </Card.Body>
-                            </Card>
-
-                          </Container>
-                        </Container>
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    </Accordion>
-
-                        <div className="d-flex justify-content-center mt-5">
-                          <ReactPaginate
-                            breakLabel="..."
-                            nextLabel="›"
-                            pageRangeDisplayed={5}
-                            previousLabel="‹"
-                            onPageChange={handlePageClick}
-                            pageClassName="page-item"
-                            pageLinkClassName="page-link"
-                            previousClassName="page-item"
-                            previousLinkClassName="page-link"
-                            nextClassName="page-item"
-                            nextLinkClassName="page-link"
-                            breakClassName="page-item"
-                            breakLinkClassName="page-link"
-                            containerClassName="pagination"
-                            activeClassName="active"
-                            pageCount={totalPages} 
-                            marginPagesDisplayed={0}
-                          />
-                        </div>
-
+                        {
+                          isLoading ? (
+                            directoryData.map(record => {
+                              return(
+                                <>
+                                    <Accordion.Item key={record.id} eventKey={record.id.toString()}>
+                                      <Accordion.Header>
+                                        {record.departmentName}
+                                        <Container className='d-flex justify-content-end'>
+                                          <Button variant="info" className='me-2' href={`${process.env.REACT_APP_BASENAME}/admin/directory/department/${record.id}`}><i className="bi bi-pencil-square"></i></Button>
+                                          <Button variant="danger"><i className="bi bi-trash3"></i></Button>
+                                        </Container>
+                                      </Accordion.Header>
+                                      <Accordion.Body>
+                                      <Container className="">
+                                        <Container className='my-3'>
+                                          <Row className='mb-2'>
+                                            {
+                                              record.departmentDescription && (
+                                                <>
+                                                  <Col xs={1}>
+                                                    <i className="bi bi-info fs-5"></i>
+                                                  </Col>
+                                                  <Col>
+                                                    {record.departmentDescription}
+                                                  </Col>
+                                                </>
+                                              )
+                                            }
+                                          </Row>
+                                          <Row>
+                                            <Col xs={1}>
+                                              <i className="bi bi-geo-alt"></i>
+                                            </Col>
+                                            <Col>
+                                            <p>
+                                              {
+                                                record.addressNote ? (
+                                                  <>
+                                                  {record.addressNote} <br />
+                                                  </>
+                                                ) : (
+                                                  <></>
+                                                )
+                                              }
+                                              {record.facility.addressLineOne} <br />
+                                              {
+                                                record.facility.addressLineTwo ? (
+                                                  <>
+                                                  {record.facility.addressLineTwo} <br />
+                                                  </>
+                                                ) : (
+                                                  <></>
+                                                )
+                                              }
+                                              {record.facility.city}, {record.facility.stateCode} {record.facility.zipCode}
+                                            </p>
+                                            </Col>
+                                            <Col xs={1}>
+                                              <i className="bi bi-telephone"></i>
+                                            </Col>
+                                            <Col>
+                                              <p>
+                                                {record.phoneNumber}
+                                              </p>
+                                            </Col>
+                                            <Col xs={1}>
+                                              <i className="bi bi-list-ol"></i>
+                                            </Col>
+                                            <Col>
+                                              <p>
+                                              {record.phoneExtension}
+                                              </p>
+                                            </Col>
+                                          </Row>
+                                        </Container>
+                                        <Container className='d-flex flex-wrap justify-content-center'>
+                                            {
+                                            record.people.$values.length > 0 ? (
+                                              record.people.$values.map((person: any) => (
+                                              <>
+                                                <Card style={{ width: '24rem' }} className="m-1">
+                                                <Card.Body>
+                                                  <Row>
+                                                  <Col md={12}>
+                                                    <Card.Subtitle className="mb-2 text-muted">{person.firstName} {person.lastName}</Card.Subtitle>
+                                                    <Badge bg="dark">{person.jobPosition}</Badge>
+                                                    <Row>
+                                                    <Col xs={1}>
+                                                      <i className="bi bi-geo-alt"></i>
+                                                    </Col>
+                                                    <Col>
+                                                      <p>
+                                                        {
+                                                        record.addressNote ? (
+                                                          <>
+                                                          {record.addressNote} <br />
+                                                          </>
+                                                        ) : (
+                                                          <></>
+                                                        )
+                                                        }
+                                                        {record.facility.addressLineOne} <br />
+                                                        {
+                                                        record.facility.addressLineTwo ? (
+                                                          <>
+                                                          {record.facility.addressLineTwo} <br />
+                                                          </>
+                                                        ) : (
+                                                          <></>
+                                                        )
+                                                        }
+                                                        {record.facility.city}, {record.facility.stateCode} {record.facility.zipCode}
+                                                      </p>
+                                                    </Col>
+                                                    </Row>
+                                                    <Row>
+                                                    <Col xs={1}>
+                                                      <i className="bi bi-telephone"></i>
+                                                    </Col>
+                                                    <Col>
+                                                      <p>
+                                                      {person.phoneNumber}
+                                                      </p>
+                                                    </Col>
+                                                    <Col xs={1}>
+                                                      <i className="bi bi-list-ol"></i>
+                                                    </Col>
+                                                    <Col>
+                                                      <p>
+                                                      {person.phoneExtension}
+                                                      </p>
+                                                    </Col>
+                                                    </Row>
+                                                    {
+                                                    person.corporateCellphone ? (
+                                                      <Row>
+                                                      <Col xs={1}>
+                                                        <i className="bi bi-phone"></i>
+                                                      </Col>
+                                                      <Col>
+                                                        <p>
+                                                        {person.corporateCellphone}
+                                                        </p>
+                                                      </Col>
+                                                      </Row>
+                                                    ) : (
+                                                      <></>
+                                                    )
+                                                    }
+                                                    {
+                                                    person.email ? (
+                                                      <Row>
+                                                      <Col xs={1}>
+                                                        <i className="bi bi-envelope"></i>
+                                                      </Col>
+                                                      <Col>
+                                                        <p>
+                                                        {person.email}
+                                                        </p>
+                                                      </Col>
+                                                      </Row>
+                                                    ) : (
+                                                      <></>
+                                                    )
+                                                    }
+                                                  </Col>
+                                                  <Col md="auto" className='text-center'>
+                                                    <Button variant="info" className='me-2' href={`${process.env.REACT_APP_BASENAME}/admin/directory/person/${person.id}`}><i className="bi bi-pencil-square"></i></Button>
+                                                    <Button variant="danger"><i className="bi bi-trash3"></i></Button>
+                                                  </Col>
+                                                  </Row>
+                                                </Card.Body>
+                                                </Card>
+                                              </>
+                                              ))
+                                            ) : (
+                                              <Container className='text-center'>
+                                                <h5>People aren't assigned on this Department.</h5>
+                                                <Button className='mx-1' variant="primary" href={`${process.env.REACT_APP_BASENAME}/admin/directory/person/new`}><i className="bi bi-journal-plus"></i> Add Contact</Button>
+                                              </Container>
+                                            )
+                                            }
+                                        </Container>
+                                      </Container>
+                                      </Accordion.Body>
+                                    </Accordion.Item>
+                                </>
+                              )
+                            })
+                          ) : (
+                            <>
+                              <Container className="text-center min-vh-100">
+                                <Spinner animation="grow" variant="success"/>
+                              </Container>
+                            </>
+                          )
+                        }
+                      </Accordion>
                     </div>
 
 
