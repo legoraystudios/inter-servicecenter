@@ -207,7 +207,7 @@ const FacilityDetail = () => {
             <Navbar3 />
                 <Container className="mt-5 min-vh-100">
                     <Container>
-                      <a className="link" href={`${process.env.REACT_APP_BASENAME}/admin/directory`}><i className="bi bi-arrow-90deg-up"></i> Go back to Directory List</a>
+                      <a className="link" href={`${process.env.REACT_APP_BASENAME}/admin/facility`}><i className="bi bi-arrow-90deg-up"></i> Go back to My Facilities</a>
                       {
                         facility ? (
                           <h3>Edit Facility: {facility.facilityName} (#{facility.id})</h3>

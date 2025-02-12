@@ -21,6 +21,7 @@ import DirectoryPersonDetail from './routes/Admin/DirectoryPersonDetail';
 import Facilities from './routes/Admin/Facility/Facilities';
 import FacilityDetail from './routes/Admin/Facility/FacilityDetail';
 import PhoneNumbers from './routes/Admin/Facility/PhoneNumbers';
+import PhoneNumberDetail from './routes/Admin/Facility/PhoneNumberDetail';
 
 function App() {
 
@@ -32,8 +33,9 @@ function App() {
         <Route path="/admin" element={<Login/>} />
         <Route path="/admin/dashboard" element={<Dashboard/>} />
         <Route path="/admin/facility" element={<Facilities/>} />
-        <Route path="/admin/facility/phones" element={<PhoneNumbers/>} />
         <Route path="/admin/facility/:id" element={<FacilityDetail/>} />
+        <Route path="/admin/facility/phones" element={<PhoneNumbers/>} />
+        <Route path="/admin/facility/phones/:id" element={<PhoneNumberDetail/>} />
         <Route path="/admin/statusbar" element={<Statusbar/>} />
         <Route path="/admin/statusbar/properties" element={<StatusbarProperties/>} />
         <Route path="/admin/statusbar/:id" element={<StatusbarMessages/>} />

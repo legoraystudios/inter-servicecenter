@@ -126,13 +126,13 @@ const PhoneNumbers = () => {
                       id="uncontrolled-tab-example"
                       className="mb-3"
                     >
-                      <Tab eventKey="phoneNumbers" title={<a className="green-link" href={`${process.env.REACT_APP_BASENAME}/admin/facility`}>My Facilities</a>}></Tab>
-                      <Tab title={<a className="green-link" href={`${process.env.REACT_APP_BASENAME}/admin/facility/phones`}>Phone Numbers</a>}></Tab>
+                      <Tab title={<a className="green-link" href={`${process.env.REACT_APP_BASENAME}/admin/facility`}>My Facilities</a>}></Tab>
+                      <Tab eventKey="phoneNumbers" title={<a className="green-link" href={`${process.env.REACT_APP_BASENAME}/admin/facility/phones`}>Phone Numbers</a>}></Tab>
                     </Tabs>
                 </Col>
                 <Col>
                     <Container className="my-3 d-flex justify-content-end">
-                        <Button className='mx-1' variant="primary" href={`${process.env.REACT_APP_BASENAME}/admin/phones/new`}><i className="bi bi-telephone-plus"></i> Add Phone Number</Button>
+                        <Button className='mx-1' variant="primary" href={`${process.env.REACT_APP_BASENAME}/admin/facility/phones/new`}><i className="bi bi-telephone-plus"></i> Add Phone Number</Button>
                     </Container>
                 </Col>
             </Row>
