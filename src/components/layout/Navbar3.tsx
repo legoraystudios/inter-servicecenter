@@ -75,6 +75,7 @@ const Navbar3 = () => {
                       )} id="basic-nav-dropdown" className="me-3">
                       <NavDropdown.Item href="#"><i className="bi bi-person-fill"></i> My Account</NavDropdown.Item>
                       <NavDropdown.Item href="#"><i className="bi bi-shield-lock"></i> Employee Management</NavDropdown.Item>
+                      <NavDropdown.Item href={`${process.env.REACT_APP_BASENAME}/admin/facility/`}><i className="bi bi-building-gear"></i> Facility Management</NavDropdown.Item>
                       <NavDropdown.Item href={`${process.env.REACT_APP_BASENAME}/admin/signout`} className="text-danger"><i className="bi bi-box-arrow-in-right"></i> Sign Out</NavDropdown.Item>
                     </NavDropdown>
                 </Navbar.Collapse>

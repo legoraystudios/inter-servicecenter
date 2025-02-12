@@ -120,11 +120,11 @@ const Home = () => {
                                   }
                               </Container>
                           </Col>
-                          <Col xs={6}>
+                          <Col xl={6}>
                               <Container>
                                 {
                                   posts[0] && (
-                                    <Card>
+                                    <Card className="mb-2">
                                       {
                                         posts[0].frontBannerFile ? (
                                           <>
@@ -198,9 +198,9 @@ const Home = () => {
                   }
 
                   {currentPosts.map((post, index) => (
-                    <Container key={index} className="my-3 p-3 border border-1 rounded" >
+                    <Card key={index} className="my-3 p-3 border border-1 rounded" >
                       <Row>
-                        <Col xs={2}>
+                        <Col md={2}>
                         {
                             post.frontBannerFile ? (
                               <>
@@ -215,7 +215,7 @@ const Home = () => {
                         </Col>
                         <Col>
                           <Card.Title><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${post.id}`}>{post.title}</a></Card.Title>
-                          <Card.Text>{truncateContent(posts[0].content, 20)}</Card.Text>
+                          <Card.Text>{truncateContent(post.content, 20)}</Card.Text>
                           <div>
                             <p>
                               <i className="bi bi-calendar-week text-success"></i> {moment(post.publishedAt).locale('es-us').format('LLLL')}<br />
@@ -224,7 +224,7 @@ const Home = () => {
                           </div>
                         </Col>
                       </Row>
-                    </Container>
+                    </Card>
                   ))}
 
                   {currentPage * postsPerPage < posts.length && (

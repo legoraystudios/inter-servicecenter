@@ -28,6 +28,8 @@ const Dashboard = () => {
     const [cookies, setCookie] = useCookies([cookieName]);
     const cookieContent = cookies[cookieName];
 
+    const currentHour = new Date().getHours();
+
     const [user, setUser] = useState<UserProperties>();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -112,7 +114,17 @@ const Dashboard = () => {
                     <Container className="my-5 d-flex flex-column min-vh-100">
                       {
                         user && (
-                          <h3>Good Morning, {user.firstName}</h3>
+                            <>
+                            {
+                              currentHour >= 0 && currentHour < 12 ? (
+                              <h3>Good Morning, {user.firstName}</h3>
+                              ) : currentHour >= 12 && currentHour < 18 ? (
+                              <h3>Good Afternoon, {user.firstName}</h3>
+                              ) : (
+                              <h3>Good Evening, {user.firstName}</h3>
+                              )
+                            }
+                            </>
                         )
                       }
                       <p>Welcome to your personal area!</p>
@@ -201,7 +213,7 @@ const Dashboard = () => {
                                   </Card.Body>
                                 </Card>
                               </a>
-                              <a href="#" className="text-decoration-none m-1">
+                              <a href={`${process.env.REACT_APP_BASENAME}/admin/directory`} className="text-decoration-none m-1">
                                 <Card style={{ width: '12rem' }} className="text-warning">
                                   <Card.Body>
                                     <Card.Title><i className="bi bi-journal-richtext fs-1"></i></Card.Title>

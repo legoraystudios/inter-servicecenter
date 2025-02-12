@@ -109,8 +109,7 @@ const Posts = () => {
           setAlertMessage({message: "ERROR: An error has occured while deleting the post.", variant: "danger" });
         } 
       }
-  
-  )}
+    )}
 
     const handlePageClick = (event: { selected: number; }) => {
       setCurrentPage(event.selected + 1);

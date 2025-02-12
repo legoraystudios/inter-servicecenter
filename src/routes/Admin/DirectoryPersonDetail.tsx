@@ -179,7 +179,7 @@ const DirectoryPersonDetail = () => {
           }
         }).catch(function (error) {
           if (error.response.status !== 200) {
-            if (!error.response.data.msg) {
+            if (error.response.data.msg) {
               setAlertMessage({message: error.response.data.msg, variant: "danger" });
             } else {
               setAlertMessage({message: "An error has occurred while performing this action.", variant: "danger" });
@@ -219,7 +219,7 @@ const DirectoryPersonDetail = () => {
             }
           }).catch(function (error) {
             if (error.response.status !== 200) {
-              if (!error.response.data.msg) {
+              if (error.response.data.msg) {
                 setAlertMessage({message: error.response.data.msg, variant: "danger" });
               } else {
                 setAlertMessage({message: "An error has occurred while performing this action.", variant: "danger" });

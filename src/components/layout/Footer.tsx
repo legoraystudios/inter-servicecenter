@@ -2,6 +2,7 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 import FooterLogo from "../images/inter-logo.png";
 import LegorayLogo from "../images/legoray-logo.png";
 import SVGCSA from "../images/SVGCSA.png";
+import Footer2 from './Footer2';
 
 const Footer = () => {
 
@@ -54,11 +55,7 @@ const Footer = () => {
               
               <p className="footer-disclaimer text-secondary">La Universidad Interamericana de Puerto Rico posee Licencia de Renovación de la Junta de Instituciones Postsecundarias de Puerto Rico y todos los programas académicos, incluyendo los programas de educación en línea, están autorizados por dicha Agencia. La Universidad Interamericana está acreditada por la Middle States Commission on Higher Education(MSCHE)1007 North Orange Street 4th Floor, MB #166, Wilmington, DE 19801 (267-284-5000). La MSCHE es una agencia de acreditación institucional reconocida por el Secretario de Educación de los Estados Unidos de Norteamérica y por el Council on Higher Education Accreditation (CHEA).</p>
             </footer>
-            <Container className="developer-footer-bar text-white" fluid>
-                <p>
-                    Developed and designed by <a href="https://legoray.com" target="_blank"><img src={LegorayLogo} height={30} /></a> on behalf from the <img src={SVGCSA} height={50} />
-                </p>
-            </Container>
+            <Footer2 />
         </div>
     )
 

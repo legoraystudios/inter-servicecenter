@@ -117,6 +117,44 @@ const PhoneDirectory = () => {
         }
     
     )}
+
+    const deleteDirectoryPerson = async (id: number) => {
+
+      await axios.delete(`${process.env.REACT_APP_BACKEND_HOST}/api/directory/people/${id}`, {
+        headers: {
+            Authorization: `Bearer ${cookieContent}`,
+          },
+      }
+      ).then(function (response) {
+        if (response.status === 200) {
+          setAlertMessage({message: "Contact deleted successfully!", variant: "success" });
+          getDirectoryDepartments();
+        }
+      }).catch(function (error) {
+        if (error.response.status !== 200) {
+          setAlertMessage({message: "ERROR: An error has occured while deleting the contact.", variant: "danger" });
+        } 
+      }
+    )}
+
+    const deleteDirectoryDepartment = async (id: number) => {
+
+      await axios.delete(`${process.env.REACT_APP_BACKEND_HOST}/api/directory/department/${id}`, {
+        headers: {
+            Authorization: `Bearer ${cookieContent}`,
+          },
+      }
+      ).then(function (response) {
+        if (response.status === 200) {
+          setAlertMessage({message: "Department deleted successfully!", variant: "success" });
+          getDirectoryDepartments();
+        }
+      }).catch(function (error) {
+        if (error.response.status !== 200) {
+          setAlertMessage({message: "ERROR: An error has occured while deleting this department.", variant: "danger" });
+        } 
+      }
+    )}
     
 
     useEffect(() => {
@@ -163,7 +201,25 @@ const PhoneDirectory = () => {
                                         {record.departmentName}
                                         <Container className='d-flex justify-content-end'>
                                           <Button variant="info" className='me-2' href={`${process.env.REACT_APP_BASENAME}/admin/directory/department/${record.id}`}><i className="bi bi-pencil-square"></i></Button>
-                                          <Button variant="danger"><i className="bi bi-trash3"></i></Button>
+                                          <Button variant="danger" className='me-2' data-bs-toggle="modal" data-bs-target={`#deleteDepartment-${record.id}`}><i className="bi bi-trash3"></i></Button>
+                                            {/* Confirm Deletion Modal */}
+                                            <div className="modal fade" id={`deleteDepartment-${record.id}`} tabIndex={-1} aria-labelledby={`deleteDepartment-${record.id}`} aria-hidden="true">
+                                              <div className="modal-dialog">
+                                                <div className="modal-content">
+                                                  <div className="modal-header">
+                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Confirm Deletion | {record.departmentName} - ID: #{record.id}</h1>
+                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                  </div>
+                                                  <div className="modal-body">
+                                                    Are you sure you want to delete {record.departmentName}'s department? ALL RELATED CONTACTS WOULD ALSO BE DELETED. THIS ACTION CANNOT BE UNDONE!
+                                                  </div>
+                                                  <div className="modal-footer">
+                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => deleteDirectoryDepartment(record.id)}>DELETE CONTACT</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
                                         </Container>
                                       </Accordion.Header>
                                       <Accordion.Body>
@@ -322,7 +378,25 @@ const PhoneDirectory = () => {
                                                   </Col>
                                                   <Col md="auto" className='text-center'>
                                                     <Button variant="info" className='me-2' href={`${process.env.REACT_APP_BASENAME}/admin/directory/person/${person.id}`}><i className="bi bi-pencil-square"></i></Button>
-                                                    <Button variant="danger"><i className="bi bi-trash3"></i></Button>
+                                                    <Button variant="danger" data-bs-toggle="modal" data-bs-target={`#deletePerson-${person.id}`}><i className="bi bi-trash3"></i></Button>
+                                                      {/* Confirm Deletion Modal */}
+                                                      <div className="modal fade" id={`deletePerson-${person.id}`} tabIndex={-1} aria-labelledby={`deletePerson-${person.id}`} aria-hidden="true">
+                                                        <div className="modal-dialog">
+                                                          <div className="modal-content">
+                                                            <div className="modal-header">
+                                                              <h1 className="modal-title fs-5" id="exampleModalLabel">Confirm Deletion | {person.firstName} {person.lastName} - ID: #{person.id}</h1>
+                                                              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                              Are you sure you want to delete {person.firstName} {person.lastName}'s contact? THIS ACTION CANNOT BE UNDONE!
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                              <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => deleteDirectoryPerson(person.id)}>DELETE CONTACT</button>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
                                                   </Col>
                                                   </Row>
                                                 </Card.Body>
