@@ -32,6 +32,13 @@ const Home = () => {
     return words.slice(0, wordLimit).join(' ') + '...';
   };
 
+  // Strip HTML (Remove HTML tags from Post Content, so it can show on the table without it.).
+  const stripHtml = (html: any) => {
+    const tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  };
+
   const currentPosts = posts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
 
   const loadMorePosts = () => {
@@ -139,7 +146,7 @@ const Home = () => {
                                       <Card.Body>
                                         <Card.Title><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${posts[0].id}`}>{posts[0].title}</a></Card.Title>
                                         <Card.Text>
-                                        {truncateContent(posts[0].content, 20)}
+                                        {truncateContent(stripHtml(posts[0].content), 20)}
                                         </Card.Text>
                                       </Card.Body>
                                     </Card>

@@ -12,6 +12,7 @@ import Announcement1 from "../components/images/sample-images/announcement1.png"
 import Announcement2 from "../components/images/sample-images/announcement2.png";
 import Image from "../components/images/image.jpg";
 import '../App.css';
+
 const Post = () => {
 
     interface PostContent {
@@ -28,6 +29,7 @@ const Post = () => {
     
     const [post, setPost] = useState<PostContent | null>(null);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [postContent, setPostContent] = useState('');
 
     const getPost = async () => {
 
@@ -35,6 +37,7 @@ const Post = () => {
       ).then(function (response) {
         if (response.status === 200) {
           setPost(response.data);
+          setPostContent(response.data.content);
           setIsLoaded(true);
         }
       }).catch(function (error) {
@@ -48,6 +51,8 @@ const Post = () => {
         getPost();
         // eslint-disable-next-line
       }, []);
+
+    const sanitizedContent = { __html: postContent };
 
     return(
         <div>
@@ -66,7 +71,7 @@ const Post = () => {
                                          <Row>
                                              {/*Main Post*/}
                                              <Col xs={12} md={8}>    
-                                                 <div className="main-post">
+                                                 <div className="main-post mb-5">
                                                  {
                                                      post.frontBannerFile ? (
                                                          <img src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${post.id}/banner`} alt="Announcement" width={800} className="main-img" />
@@ -74,13 +79,11 @@ const Post = () => {
                                                          <img src={Image} alt="Announcement" width={800}className="main-img" />
                                                      )
                                                  }
-                                                     <h4>{post.title}</h4>
-                                                      <p>
-                                                         {post.content}
-                                                      </p>
+                                                    <h4 className="my-2 text-green">{post.title}</h4>
+                                                    <div dangerouslySetInnerHTML={sanitizedContent} />
                                                  </div>
-                                             <hr/>
-                                             <div className="organizer-info">
+                                             <hr className="mt-5"/>
+                                             <div className="organizer-info mb-5">
                                                  <h4>Información del Autor</h4>
                                                  <p>
                                                      <i className="bi bi-person-fill organizer-icon"></i>

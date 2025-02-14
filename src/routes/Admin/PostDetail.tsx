@@ -6,6 +6,7 @@ import Footer2 from '../../components/layout/Footer2';
 import { Container, Button, Row, Col, Form, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import Tiptap from '../../components/layout/Tiptap';
 
 const PostDetail = () => {
 
@@ -192,7 +193,10 @@ const PostDetail = () => {
         }
       
     )}
-    
+
+    const handleContentChange = (newContent: string) => {
+      setContent(newContent);
+    }
 
     useEffect(() => {
         document.title = "Post | Service Center";
@@ -204,7 +208,7 @@ const PostDetail = () => {
     return(
         <div>
             <Navbar3 />
-                <Container className="mt-5">
+                <Container className="mt-5 min-vh-100">
                     <Container>
                       <a className="link" href={`${process.env.REACT_APP_BASENAME}/admin/posts`}><i className="bi bi-arrow-90deg-up"></i> Go back to Post List</a>
                       {
@@ -230,15 +234,11 @@ const PostDetail = () => {
                           modifyPost
                         )
                       }>
+                        <Form.Label htmlFor="postTitle">Post Title</Form.Label>
                         <Form.Control className="mb-3" placeholder="Post Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-                        <Form.Control
-                        	            as="textarea"
-                        	            placeholder="Content"
-                                      value={content} 
-                                      onChange={(e) => setContent(e.target.value)}
-                        	            style={{ height: '300px' }}
-                                      className="mb-3"
-                        	          />
+                        <Form.Label htmlFor="postContent">Post Content</Form.Label>
+                        <Tiptap onContentChange={handleContentChange} initialContent={content} />
+                        
                         <Form.Group controlId="formFile" className="mb-3">
                           <Form.Label>Post Banner (allowed extensions: .png, .jpg and .jpeg).</Form.Label>
                           {

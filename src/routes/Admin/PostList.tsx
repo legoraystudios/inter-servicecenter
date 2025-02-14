@@ -54,6 +54,13 @@ const Posts = () => {
       return words.slice(0, wordLimit).join(' ') + '...';
     };
 
+    // Strip HTML (Remove HTML tags from Post Content, so it can show on the table without it.).
+    const stripHtml = (html: any) => {
+      const tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    };
+
     const navigate = useNavigate()
 
     const checkIfSignedIn = async () => {
@@ -178,7 +185,7 @@ const Posts = () => {
                                                       )
                                                     }
                                                     <td>{record.title}</td>
-                                                    <td>{truncateContent(record.content, 20)}</td>
+                                                    <td>{truncateContent(stripHtml(record.content), 20)}</td>
                                                     <td>{moment(record.publishedAt).locale('es-us').format('L hh:mm:ss a')}</td>
                                                     <td>{record.authorName}</td>
                                                     <td>

@@ -28,6 +28,10 @@
   color: white;
 }
 
+.text-green {
+  color: var(--background-color-primary) !important;
+}
+
 .text-secondary {
   color: var(--background-color-secondary) !important;
 }
@@ -123,6 +127,10 @@
   color: green; /* Green color for icons */
   vertical-align: middle; /* Align icons with text */
   margin-right: 5px; /* Space between icon and text */
+}
+
+.taptip-editor {
+  height: 400px;
 }
 
 footer {
