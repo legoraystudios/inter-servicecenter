@@ -22,6 +22,8 @@ import Facilities from './routes/Admin/Facility/Facilities';
 import FacilityDetail from './routes/Admin/Facility/FacilityDetail';
 import PhoneNumbers from './routes/Admin/Facility/PhoneNumbers';
 import PhoneNumberDetail from './routes/Admin/Facility/PhoneNumberDetail';
+import EmployeeList from './routes/Admin/Employees/EmployeeList';
+import EmployeeDetail from './routes/Admin/Employees/EmployeeDetail';
 
 function App() {
 
@@ -31,6 +33,8 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/post/:id" element={<Post/>} />
         <Route path="/admin" element={<Login/>} />
+        <Route path="/admin/employees" element={<EmployeeList/>} />
+        <Route path="/admin/employees/:id" element={<EmployeeDetail/>} />
         <Route path="/admin/dashboard" element={<Dashboard/>} />
         <Route path="/admin/facility" element={<Facilities/>} />
         <Route path="/admin/facility/:id" element={<FacilityDetail/>} />

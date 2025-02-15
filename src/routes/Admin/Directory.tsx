@@ -13,10 +13,11 @@ import { useCookies } from 'react-cookie';
 const PhoneDirectory = () => {
 
     interface UserProperties {
-        id: number,
-        firstName: any,
-        lastName: string,
-        email: string,
+      id: number,
+      firstName: any,
+      lastName: string,
+      email: string,
+      role: string,
     }
 
     interface DirectoryContent {
@@ -183,10 +184,16 @@ const PhoneDirectory = () => {
                         )}
                     </Container>
 
-                    <Container className="mt-3 d-flex justify-content-end">
-                        <Button className='mx-1' variant="primary" href={`${process.env.REACT_APP_BASENAME}/admin/directory/person/new`}><i className="bi bi-journal-plus"></i> Add Contacts</Button>
-                        <Button className='mx-1' variant="secondary" href={`${process.env.REACT_APP_BASENAME}/admin/directory/department/new`}><i className="bi bi-node-plus"></i> Add Department</Button>
-                    </Container>
+                    {
+                      user?.role == "Admin" || user?.role == "Super Administrator" && (
+                        <>
+                          <Container className="mt-3 d-flex justify-content-end">
+                            <Button className='mx-1' variant="primary" href={`${process.env.REACT_APP_BASENAME}/admin/directory/person/new`}><i className="bi bi-journal-plus"></i> Add Contacts</Button>
+                            <Button className='mx-1' variant="secondary" href={`${process.env.REACT_APP_BASENAME}/admin/directory/department/new`}><i className="bi bi-node-plus"></i> Add Department</Button>
+                          </Container>
+                        </>
+                      )
+                    }
 
                     <div className='mt-3'>
                       <Accordion defaultActiveKey="1">
@@ -200,8 +207,14 @@ const PhoneDirectory = () => {
                                       <Accordion.Header>
                                         {record.departmentName}
                                         <Container className='d-flex justify-content-end'>
-                                          <Button variant="info" className='me-2' href={`${process.env.REACT_APP_BASENAME}/admin/directory/department/${record.id}`}><i className="bi bi-pencil-square"></i></Button>
-                                          <Button variant="danger" className='me-2' data-bs-toggle="modal" data-bs-target={`#deleteDepartment-${record.id}`}><i className="bi bi-trash3"></i></Button>
+                                          {
+                                            user?.role == "Admin" || user?.role == "Super Administrator" && (
+                                              <>
+                                                <Button variant="info" className='me-2' href={`${process.env.REACT_APP_BASENAME}/admin/directory/department/${record.id}`}><i className="bi bi-pencil-square"></i></Button>
+                                                <Button variant="danger" className='me-2' data-bs-toggle="modal" data-bs-target={`#deleteDepartment-${record.id}`}><i className="bi bi-trash3"></i></Button>
+                                              </>
+                                            )
+                                          }
                                             {/* Confirm Deletion Modal */}
                                             <div className="modal fade" id={`deleteDepartment-${record.id}`} tabIndex={-1} aria-labelledby={`deleteDepartment-${record.id}`} aria-hidden="true">
                                               <div className="modal-dialog">
@@ -377,8 +390,14 @@ const PhoneDirectory = () => {
                                                     }
                                                   </Col>
                                                   <Col md="auto" className='text-center'>
-                                                    <Button variant="info" className='me-2' href={`${process.env.REACT_APP_BASENAME}/admin/directory/person/${person.id}`}><i className="bi bi-pencil-square"></i></Button>
-                                                    <Button variant="danger" data-bs-toggle="modal" data-bs-target={`#deletePerson-${person.id}`}><i className="bi bi-trash3"></i></Button>
+                                                    {
+                                                      user?.role == "Admin" || user?.role == "Super Administrator" && (
+                                                        <>
+                                                          <Button variant="info" className='me-2' href={`${process.env.REACT_APP_BASENAME}/admin/directory/person/${person.id}`}><i className="bi bi-pencil-square"></i></Button>
+                                                          <Button variant="danger" data-bs-toggle="modal" data-bs-target={`#deletePerson-${person.id}`}><i className="bi bi-trash3"></i></Button>
+                                                        </>
+                                                      )
+                                                    }
                                                       {/* Confirm Deletion Modal */}
                                                       <div className="modal fade" id={`deletePerson-${person.id}`} tabIndex={-1} aria-labelledby={`deletePerson-${person.id}`} aria-hidden="true">
                                                         <div className="modal-dialog">

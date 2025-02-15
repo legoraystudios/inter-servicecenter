@@ -73,6 +73,9 @@ const FacilityDetail = () => {
         if (response.status === 200) {
           setUser(response.data)
         }
+        if (response.data.role !== "Admin" && response.data.role !== "Super Administrator") {
+          navigate("/admin");
+        }
       }).catch(function (error) {
         if (error.response.status !== 200) {
           navigate("/admin");

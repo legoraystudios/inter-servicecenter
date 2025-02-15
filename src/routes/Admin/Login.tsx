@@ -54,7 +54,7 @@ const Admin: React.FC = () => {
   return(
       <div>
           <Navbar2 />
-              <Container className="w-25 p-3">
+              <Container className="p-3 min-vh-100 w-25">
               { alertMessage?.message && (
                 <Alert variant={alertMessage.variant}>{alertMessage.message}</Alert>
               )}
