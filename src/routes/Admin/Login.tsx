@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Form, Button, Alert, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import Navbar2 from '../../components/layout/Navbar2';
@@ -70,9 +70,16 @@ const Admin: React.FC = () => {
                       <Form.Label>Password</Form.Label>
                       <Form.Control type="password" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                      <Form.Check type="checkbox" label="Remember me for 30 days" checked={rememberSession} onChange={(e) => setRememberSession(e.target.checked)} />
-                    </Form.Group>
+                    <Row>
+                      <Col>
+                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                          <Form.Check type="checkbox" label="Remember me for 30 days" checked={rememberSession} onChange={(e) => setRememberSession(e.target.checked)} />
+                        </Form.Group>
+                      </Col>
+                      <Col className='text-end'>
+                        <a href={`${process.env.REACT_APP_BASENAME}/admin/forgot-password`} className="text-decoration-none">Forgot Password?</a>
+                      </Col>
+                    </Row>
                     <Button variant="primary" type="submit">
                       Login
                     </Button>

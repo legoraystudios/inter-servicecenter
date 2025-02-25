@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import UserImage from '../../../components/images/user.png';
 import Navbar3 from '../../../components/layout/Navbar3';
 import Footer2 from '../../../components/layout/Footer2';
-import { Container, Button, Row, Col, Table, Alert, Pagination, Spinner } from 'react-bootstrap';
+import { Container, Button, Row, Col, Table, Alert, Pagination, Spinner, Badge } from 'react-bootstrap';
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/locale/es-us';
@@ -24,7 +24,7 @@ const EmployeeList = () => {
         firstName: string,
         lastName: string,
         email: any,
-        role: number,
+        role: string,
         profilePhotoFile: string,
         createdAt: string
     }
@@ -197,7 +197,15 @@ const EmployeeList = () => {
                                                     }
                                                     <td>{record.firstName} {record.lastName}</td>
                                                     <td>{record.email}</td>
-                                                    <td>{record.role}</td>
+                                                    <td>
+                                                      {
+                                                        record.role == "Super Administrator" || record.role == "Admin" ? (
+                                                          <Badge className="mx-2" bg="danger">{record.role}</Badge>
+                                                        ) : (
+                                                          <Badge className="mx-2" bg="primary">{record.role}</Badge>
+                                                        )
+                                                      }
+                                                    </td>
                                                     <td>{moment(record.createdAt).locale('es-us').format('L hh:mm:ss a')}</td>
                                                     <td>
                                                       {

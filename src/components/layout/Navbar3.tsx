@@ -9,7 +9,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import NavLogo from "../images/Service-Center-Logo.png";
 import userEvent from '@testing-library/user-event';
-import { Alert, Badge, Button, Col, Form, Row } from 'react-bootstrap';
+import { Alert, Badge, Button, Col, Form, Row, Spinner } from 'react-bootstrap';
 
 const Navbar3 = () => {
 
@@ -32,6 +32,8 @@ const Navbar3 = () => {
     // Alert Messages
     const [alertMessage, setAlertMessage] = useState<{ message: string; variant: string } | null>(null);
 
+    const [isLoaded, setIsLoaded] = useState(true);
+
     // Post Data
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -49,6 +51,30 @@ const Navbar3 = () => {
         setProfilePicture(null);
       }
     }
+
+    const sendPasswordResetRequest = async (event: any) => {
+
+      event.preventDefault();
+  
+      setIsLoaded(false);
+  
+        await axios.post(`${process.env.REACT_APP_BACKEND_HOST}/api/auth/forgot-password/${email}`
+        ).then(function (response) {
+          if (response.status === 200) {
+            setAlertMessage({message: "A confirmation email with a password reset link was sent to " + email, variant: "success" });
+            setIsLoaded(true);
+          }
+        }).catch(function (error) {
+          if (error.response.data.msg) {
+            setAlertMessage({message: error.response.data.msg, variant: "danger" });
+            setIsLoaded(true);
+          } else {
+            setAlertMessage({message: "An error has occurred while performing this action.", variant: "danger" });
+            setIsLoaded(true);
+          }
+        }
+  
+    )}
 
     const navigate = useNavigate()
 
@@ -86,6 +112,7 @@ const Navbar3 = () => {
                 FirstName: firstName,
                 LastName: lastName,
                 Email: email,
+                Role: role,
             },
             {
               headers: {
@@ -93,6 +120,11 @@ const Navbar3 = () => {
               },
             }
         ).then(function (response) {
+
+            if (profilePicture !== null && user?.profilePhotoFile == null) {
+              uploadProfilePicture(event);
+            }
+
             if (response.status === 200) {
                 setAlertMessage({message: "Employee modified successfully!", variant: "success" });
             }
@@ -122,6 +154,38 @@ const Navbar3 = () => {
       ).then(function (response) {
           if (response.status === 200) {
               setAlertMessage({message: "Profile Photo removed successfully!", variant: "success" });
+          }
+        }).catch(function (error) {
+          if (error.response.status !== 200) {
+            if (!error.response.data.msg) {
+              setAlertMessage({message: error.response.data.msg, variant: "danger" });
+            } else {
+              setAlertMessage({message: "An error has occurred while performing this action.", variant: "danger" });
+            }
+          } 
+        }
+      
+    )}
+
+    const uploadProfilePicture = async (event: any) => {
+
+      event.preventDefault();
+  
+        await axios.post(`${process.env.REACT_APP_BACKEND_HOST}/api/account/profile-photo`, 
+          {
+            Id: user?.id,
+            ...(profilePicture !== null && { ImageFile: profilePicture }),
+          },
+          {
+            headers: {
+               'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${cookieContent}`,
+              },
+          }
+      ).then(function (response) {
+          if (response.status === 200) {
+              setAlertMessage({message: "Profile Photo uploaded successfully!", variant: "success" });
+              checkIfSignedIn();
           }
         }).catch(function (error) {
           if (error.response.status !== 200) {
@@ -229,8 +293,36 @@ const Navbar3 = () => {
                         }
                         <div className="d-flex align-items-center">
                           <p>Trying to change the password?</p>
-                          <Button className="mx-3" variant="dark"><i className="bi bi-key"></i> Request Password Reset Link</Button>
+                          {
+                            isLoaded ? (
+                              <Button className="mx-3" variant="dark" onClick={sendPasswordResetRequest}><i className="bi bi-key"></i> Request Password Reset Link</Button>
+                            ) : (
+                              <Container className="text-center">
+                                <Spinner animation="grow" variant="success"/>
+                              </Container>
+                            )
+                          }
                         </div>
+                        <Form.Group controlId="formFile" className="my-4">
+                          <Form.Label>Profile Picture (allowed extensions: .png, .jpg and .jpeg).</Form.Label>
+                            {
+                              user?.profilePhotoFile ? (
+                                <>
+                                  <Alert variant="secondary">
+                                    Profile Picture uploaded: 
+                                      <Alert.Link className="ms-1" href={`${process.env.REACT_APP_BACKEND_HOST}/api/account/${user.id}/profile-photo`} target='_blank'>
+                                        {user.profilePhotoFile} 
+                                      </Alert.Link>
+                                    <Button variant="outline-danger" className="mx-3" onClick={removeProfilePicture}>Remove</Button>
+                                  </Alert>
+                                </>
+                              ) : (
+                                <>
+                                  <Form.Control type="file" onChange={handleFileChange} accept=".jpg, .jpeg, .png" />
+                                </>
+                              )
+                            }
+                          </Form.Group>
                       <div className="modal-footer mt-5">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => window.location.reload()}>Cancel</button>
                         <button type="submit" className="btn btn-primary">Save Changes</button>

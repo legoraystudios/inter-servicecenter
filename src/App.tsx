@@ -24,6 +24,9 @@ import PhoneNumbers from './routes/Admin/Facility/PhoneNumbers';
 import PhoneNumberDetail from './routes/Admin/Facility/PhoneNumberDetail';
 import EmployeeList from './routes/Admin/Employees/EmployeeList';
 import EmployeeDetail from './routes/Admin/Employees/EmployeeDetail';
+import PasswordResetRequest from './routes/Admin/ForgotPassword/PasswordResetRequest';
+import ResetPassword from './routes/Admin/ForgotPassword/ResetPassword';
+import Directory from './routes/Directory';
 
 function App() {
 
@@ -31,8 +34,11 @@ function App() {
     <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
       <Routes>
         <Route path="/" element={<Home/>} />
+        <Route path="/directory" element={<Directory/>} />
         <Route path="/post/:id" element={<Post/>} />
         <Route path="/admin" element={<Login/>} />
+        <Route path="/admin/forgot-password" element={<PasswordResetRequest/>} />
+        <Route path="/admin/forgot-password/reset" element={<ResetPassword/>} />
         <Route path="/admin/employees" element={<EmployeeList/>} />
         <Route path="/admin/employees/:id" element={<EmployeeDetail/>} />
         <Route path="/admin/dashboard" element={<Dashboard/>} />

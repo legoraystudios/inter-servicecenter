@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Image from '../../../components/images/image.jpg';
 import Navbar3 from '../../../components/layout/Navbar3';
 import Footer2 from '../../../components/layout/Footer2';
-import { Container, Button, Row, Col, Form, Alert } from 'react-bootstrap';
+import { Container, Button, Row, Col, Form, Alert, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import Tiptap from '../../../components/layout/Tiptap';
@@ -33,6 +33,8 @@ const EmployeeDetail = () => {
     const cookieName: string = `${process.env.REACT_APP_SESSION_COOKIE_NAME}`;
     const [cookies, setCookie] = useCookies([cookieName]);
     const cookieContent = cookies[cookieName];
+
+    const [isLoaded, setIsLoaded] = useState(true);
 
     // Logged User Data
     const [user, setUser] = useState<UserProperties>();
@@ -160,6 +162,11 @@ const EmployeeDetail = () => {
               },
             }
         ).then(function (response) {
+
+          if (profilePicture !== null && account?.profilePhotoFile == null) {
+            uploadProfilePicture(event);
+          }
+
             if (response.status === 200) {
                 setAlertMessage({message: "Employee modified successfully!", variant: "success" });
                 setTimeout(() => {
@@ -205,6 +212,62 @@ const EmployeeDetail = () => {
         }
       
     )}
+
+    const uploadProfilePicture = async (event: any) => {
+
+      event.preventDefault();
+  
+        await axios.post(`${process.env.REACT_APP_BACKEND_HOST}/api/account/profile-photo`, 
+          {
+            Id: id,
+            ...(profilePicture !== null && { ImageFile: profilePicture }),
+          },
+          {
+            headers: {
+               'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${cookieContent}`,
+              },
+          }
+      ).then(function (response) {
+          if (response.status === 200) {
+              setAlertMessage({message: "Profile Photo uploaded successfully!", variant: "success" });
+              getAccount();
+          }
+        }).catch(function (error) {
+          if (error.response.status !== 200) {
+            if (!error.response.data.msg) {
+              setAlertMessage({message: error.response.data.msg, variant: "danger" });
+            } else {
+              setAlertMessage({message: "An error has occurred while performing this action.", variant: "danger" });
+            }
+          } 
+        }
+      
+    )}
+
+    const sendPasswordResetRequest = async (event: any) => {
+
+      event.preventDefault();
+  
+      setIsLoaded(false);
+  
+        await axios.post(`${process.env.REACT_APP_BACKEND_HOST}/api/auth/forgot-password/${email}`
+        ).then(function (response) {
+          if (response.status === 200) {
+            setAlertMessage({message: "A confirmation email with a password reset link was sent to " + email, variant: "success" });
+            setIsLoaded(true);
+          }
+        }).catch(function (error) {
+          if (error.response.data.msg) {
+            setAlertMessage({message: error.response.data.msg, variant: "danger" });
+            setIsLoaded(true);
+          } else {
+            setAlertMessage({message: "An error has occurred while performing this action.", variant: "danger" });
+            setIsLoaded(true);
+          }
+        }
+  
+      )}
 
     useEffect(() => {
         document.title = "Post | Service Center";
@@ -265,7 +328,6 @@ const EmployeeDetail = () => {
                                 <Col>
                                   <Form.Label htmlFor="role">Role</Form.Label>
                                   <Form.Select value={role} onChange={(e: any) => setRole(e.target.value)}>
-                                    <option>Please Select...</option>
                                     <option value="Employee">Employee</option>
                                     <option value="Admin">Administrator</option>
                                     <option value="Super Administrator">Super Administrator</option>
@@ -274,7 +336,15 @@ const EmployeeDetail = () => {
                               </Row>
                               <div className="d-flex align-items-center">
                                 <p>Trying to change the password?</p>
-                                <Button className="mx-3" variant="dark"><i className="bi bi-key"></i> Request Password Reset Link</Button>
+                                {
+                                  isLoaded ? (
+                                    <Button className="mx-3" variant="dark" onClick={sendPasswordResetRequest}><i className="bi bi-key"></i> Request Password Reset Link</Button>
+                                  ) : (
+                                    <Container className="text-center">
+                                      <Spinner animation="grow" variant="success"/>
+                                    </Container>
+                                  )
+                                }
                               </div>
                             </>
                           ) : (

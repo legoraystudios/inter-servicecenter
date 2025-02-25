@@ -99,7 +99,7 @@ const MainNavbar = () => {
                                   </a>
                                 </Col>
                                 <Col>
-                                  <a className="nav-link nav-dropdown-item" href="#">
+                                  <a className="nav-link nav-dropdown-item" href={`${process.env.REACT_APP_BASENAME}/directory`}>
                                     <i className="bi bi-journal-text me-1"></i>
                                     Directorio Telefónico
                                   </a>
