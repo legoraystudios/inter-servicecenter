@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import { Container, Button, Card, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Button, Card, Row, Col, Spinner, Alert } from "react-bootstrap";
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/locale/es-us';
@@ -26,8 +26,11 @@ const Post = () => {
     }
 
     const { id } = useParams();
+
+    const [alertMessage, setAlertMessage] = useState<{ message: string; variant: string } | null>(null);
     
     const [post, setPost] = useState<PostContent | null>(null);
+    const [otherPosts, setOtherPosts] = useState<PostContent[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [postContent, setPostContent] = useState('');
 
@@ -41,14 +44,45 @@ const Post = () => {
           setIsLoaded(true);
         }
       }).catch(function (error) {
-        
+        setAlertMessage({message: "ERROR: An error has occured while gathering current post.", variant: "danger" });
       }
     
     )}
 
+    const getOtherPosts = async () => {
+
+        await axios.get(`${process.env.REACT_APP_BACKEND_HOST}/api/post`,
+        ).then(function (response) {
+          if (response.status === 200) {
+            if (response.data.$values.length > 1) {
+                // Filter Current Post from List
+                const filteredPosts = response.data.$values.filter((post: PostContent) => post.id !== parseInt(id!));
+                const shuffledPosts = filteredPosts.sort(() => 0.5 - Math.random());
+
+                // Select First 10 Posts
+                const firstTen = shuffledPosts.slice(0, Math.min(10, filteredPosts.length));
+
+                // Randomly select two from the first 10
+                if (firstTen.length > 1) {
+                    const selectedPosts = firstTen.sort(() => 0.5 - Math.random()).slice(0, 2);
+                    setOtherPosts(selectedPosts);
+                } else if (firstTen.length === 1) {
+                    setOtherPosts(firstTen);
+                } else {
+                    setOtherPosts([]);
+                }
+            }
+            setIsLoaded(true);
+          }
+        }).catch(function (error) {
+            setAlertMessage({message: "ERROR: An error has occured while gathering current posts.", variant: "danger" });
+        }
+    
+      )}
 
     useEffect(() => {
         getPost();
+        getOtherPosts();
         // eslint-disable-next-line
       }, []);
 
@@ -65,6 +99,11 @@ const Post = () => {
                              post !== null ? (
                                  <>
                                      <Container className="mt-5">
+                                        <Container className="mt-3">
+                                            { alertMessage?.message && (
+                                              <Alert variant={alertMessage.variant}>{alertMessage.message}</Alert>
+                                            )}
+                                        </Container>
                                          <div className="mb-3">
                                              <a className="link" href={`${process.env.REACT_APP_BASENAME}/`}><i className="bi bi-arrow-90deg-up"></i> <i className="bi bi-house"></i> Inicio</a>
                                          </div>
@@ -98,23 +137,25 @@ const Post = () => {
                                              
                                              
                                               {/* Related Posts Column */}
-                                              <Col xs={12} md={4}>
-                                                     <h4 className="related-heading">Otros Posts</h4>
-                                                     <Card className="related-post">
-                                                         <Card.Img  src={Announcement1} alt="Related Post 1" />
-                                                         <Card.Body>
-                                                             <Card.Title>Related Post 1</Card.Title>
-                                                             <Card.Text>Brief description of related post 1.</Card.Text>
-                                                         </Card.Body>
-                                                     </Card>
-                                                     <Card className="related-post">
-                                                         <Card.Img  src={Announcement2} alt="Related Post 2" />
-                                                         <Card.Body>
-                                                             <Card.Title>Related Post 2</Card.Title>
-                                                             <Card.Text>Brief description of related post 2.</Card.Text>
-                                                         </Card.Body>
-                                                     </Card>
-                                                 </Col>
+                                              {
+                                                otherPosts.length > 0 && (
+                                                    <>
+                                                        <Col xs={12} md={4}>
+                                                             <h4 className="related-heading">Otros Posts</h4>
+                                                             {
+                                                                    otherPosts.map((post: PostContent) => (
+                                                                        <Card key={post.id} className="related-post">
+                                                                            <Card.Img src={`${process.env.REACT_APP_BACKEND_HOST}/api/post/${post.id}/banner`} alt={post.title} />
+                                                                            <Card.Body>
+                                                                                <Card.Title><a className="green-link" href={`${process.env.REACT_APP_BASENAME}/post/${post.id}`}>{post.title}</a></Card.Title>
+                                                                            </Card.Body>
+                                                                        </Card>
+                                                                    ))
+                                                             }
+                                                        </Col>
+                                                    </>
+                                                )
+                                              }
                                          </Row>
                                      </Container>
                                  </>

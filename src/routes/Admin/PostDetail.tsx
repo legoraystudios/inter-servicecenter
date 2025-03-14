@@ -70,7 +70,7 @@ const PostDetail = () => {
         }
       }).catch(function (error) {
         if (error.response.status !== 200) {
-          navigate("/admin");
+          navigate("/admin/signout");
         } 
       }
   

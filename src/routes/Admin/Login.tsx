@@ -55,6 +55,12 @@ const Admin: React.FC = () => {
       <div>
           <Navbar2 />
               <Container className="p-3 min-vh-100 w-25">
+
+              <Alert variant="info">
+                Welcome to your new administrative panel! This system is currently on a beta version, meaning that you can encounter with some bugs or errors.
+                Feel free to report any issue submitting an email at <Alert.Link className="text-decoration-none" href="mailto:hola@legoray.com"><b>hola@legoray.com</b></Alert.Link>
+              </Alert>
+
               { alertMessage?.message && (
                 <Alert variant={alertMessage.variant}>{alertMessage.message}</Alert>
               )}
